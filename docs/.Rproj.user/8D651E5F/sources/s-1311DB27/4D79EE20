@@ -1,18 +1,18 @@
 {
     "id": "4D79EE20",
-    "path": "~/DACSS/Blog/dacss-blog/_site.yml",
+    "path": "~/DACSS/Blog/Untitled/docs/_site.yml",
     "project_path": "_site.yml",
     "type": "yaml",
-    "hash": "3459327005",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1643489388603.0,
     "source_on_save": false,
     "relative_order": 4,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "5,36",
+        "cursorPosition": "8,18",
         "scrollLine": "0"
     },
     "folds": "",
@@ -20,7 +20,7 @@
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1643489625143,
+    "last_content_update": 1643490445809,
     "read_only": false,
     "read_only_alternatives": []
 }

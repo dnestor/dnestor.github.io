@@ -1,7 +1,7 @@
 name: "dacss-blog"
-title: "My Blog"
+title: "Dana Nestor's Blog"
 description: |
-  My Blog
+  Dana Nestor's blog for DACSS work
 output_dir: "."
 base_url: https://dnestor.github.io/
 navbar:
