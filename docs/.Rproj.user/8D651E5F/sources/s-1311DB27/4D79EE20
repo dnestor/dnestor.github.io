@@ -3,9 +3,9 @@
     "path": "~/DACSS/Blog/Untitled/docs/_site.yml",
     "project_path": "_site.yml",
     "type": "yaml",
-    "hash": "0",
+    "hash": "1641719205",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1643489388603.0,
     "source_on_save": false,
     "relative_order": 4,
@@ -16,11 +16,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1643489625,
+    "lastKnownWriteTime": 1643490728,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1643490445809,
+    "last_content_update": 1643490728441,
     "read_only": false,
     "read_only_alternatives": []
 }
