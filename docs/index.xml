@@ -11,17 +11,16 @@
     <item>
       <title>Short Assignment 2</title>
       <dc:creator>Dana Nestor</dc:creator>
-      <link>https://dnestor.github.io/posts/assignment 2</link>
+      <link>https://dnestor.github.io/posts/2022-02-02-networks2</link>
       <description>Short assignment 2 for Political and Social Network Analysis</description>
-      <guid>https://dnestor.github.io/posts/assignment 2</guid>
+      <guid>https://dnestor.github.io/posts/2022-02-02-networks2</guid>
       <pubDate>Wed, 02 Feb 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Welcome to My Blog</title>
-      <dc:creator>Nora Jones</dc:creator>
+      <dc:creator>Dana Nestor</dc:creator>
       <link>https://dnestor.github.io/posts/welcome</link>
-      <description>Welcome to our new blog, My Blog. We hope you enjoy 
-reading what we have to say!</description>
+      <description>Welcome to my new blog, where I'll be posting assignments from my master's program in data analytics and computational social science</description>
       <guid>https://dnestor.github.io/posts/welcome</guid>
       <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
     </item>

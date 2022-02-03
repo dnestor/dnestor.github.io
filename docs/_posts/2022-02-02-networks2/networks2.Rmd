@@ -1,15 +1,18 @@
 ---
 title: "Short Assignment 2"
 description: |
-  Short assignment 2 for Political and Social Network Analysis
+ Short assignment 2 for Political and Social Network Analysis
 author:
-  - name: Dana Nestor 
+  - name: Dana Nestor
     url: https://dnestor.github.io/
     affiliation: UMASS DACSS
     affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program
-date: "`r Sys.Date()`"
-output: distill::distill_article
+date: 02-02-2022
+output:
+  distill::distill_article:
+    self_contained: false
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -130,4 +133,3 @@ gtrans(network_statnet)
 ```
 
 Here, we see that the transitivity calculatuons differ between the two different network objects. This is likely because the statnet function calculates transitivity slightly differently for directed networks and omits certain triads missing information. However, both functions return a relatively high transitivity score, which makes sense given that this network is specifically intended to involve significant leveraging of connections and wheeling-dealing which requires more transitivity.
-

@@ -1,13 +1,12 @@
 ---
 title: "Welcome to My Blog"
 description: |
-  Welcome to our new blog, My Blog. We hope you enjoy 
-  reading what we have to say!
+  Welcome to my new blog, where I'll be posting assignments from my master's program in data analytics and computational social science
 author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program
 date: 01-29-2022
 output:
   distill::distill_article:
