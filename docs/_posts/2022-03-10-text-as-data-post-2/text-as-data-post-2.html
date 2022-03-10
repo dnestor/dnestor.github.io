@@ -111,7 +111,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Text as Data Post 2"]},{"type":"character","attributes":{},"value":["Scraping union contract data\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Dana Nestor"]},{"type":"character","attributes":{},"value":["https://dnestor.github.io/"]},{"type":"character","attributes":{},"value":["UMASS DACSS"]},{"type":"character","attributes":{},"value":["https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program"]}]}]},{"type":"character","attributes":{},"value":["03-10-2022"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","draft","output"]}},"value":[{"type":"character","attributes":{},"value":["Text as Data Post 2"]},{"type":"character","attributes":{},"value":["Scraping union contract data\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Dana Nestor"]},{"type":"character","attributes":{},"value":["https://dnestor.github.io/"]},{"type":"character","attributes":{},"value":["UMASS DACSS"]},{"type":"character","attributes":{},"value":["https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program"]}]}]},{"type":"character","attributes":{},"value":["03-10-2022"]},{"type":"character","attributes":{},"value":["Text as Data","Web Scraping"]},{"type":"logical","attributes":{},"value":[true]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1467,6 +1467,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-title">
 <h1>Text as Data Post 2</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt=tag">Text as Data</div>
+<div class="dt=tag">Web Scraping</div>
+</div>
 <!--/radix_placeholder_categories-->
 <p><p>Scraping union contract data</p></p>
 </div>
@@ -1505,6 +1509,8 @@ Show code
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Create subset of docs to test scrape</span>
 <span class='va'>clean_test_set</span> <span class='op'>&lt;-</span> <span class='va'>clean_contracts_table</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,<span class='op'>]</span>
 
+<span class='co'># Create vectors for source file URL (based on pattern and doc ID available in metadata table)</span>
+<span class='co'># as well as destination locations for each file</span>
 <span class='va'>url</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId="</span>, <span class='va'>clean_test_set</span><span class='op'>$</span><span class='va'>CBA.File</span><span class='op'>)</span>
 <span class='va'>dest_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"/Users/dananestor/DACSS/Text as Data/Contract files/"</span>, <span class='va'>clean_test_set</span><span class='op'>$</span><span class='va'>CBA.File</span>, <span class='st'>".pdf"</span><span class='op'>)</span>
 
