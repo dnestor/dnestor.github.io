@@ -8,6 +8,8 @@ author:
     affiliation: UMASS DACSS
     affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program
 date: 02-05-2022
+categories:
+  - Text as Data
 output:
   distill::distill_article:
     self_contained: false

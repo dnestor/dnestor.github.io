@@ -1,0 +1,59 @@
+---
+title: "Text as Data Post 2"
+description: |
+  Scraping union contract data
+author:
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program
+date: 03-10-2022
+categories:
+  - Text as Data
+  - Web Scraping
+draft: TRUE
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(tidyverse)
+```
+
+
+
+```{r read in and clean up metadata}
+# Read in table of available private sector CBAs, downloaded from DOL source
+messy_contracts_table <- read.csv("/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-10-text-as-data-post-2/CBAList (2).csv")
+
+# Remove contracts without metadata on industry or number of employees
+clean_contracts_table <- messy_contracts_table %>%
+  filter(NAICS. != is.na(NAICS.)) %>%
+  filter(X.Wrkrs != is.na(X.Wrkrs))
+```
+
+Now number of observations is lowered from 2,623 to 1,854
+
+```{r download files}
+# Create subset of docs to test scrape
+clean_test_set <- clean_contracts_table[1:10,]
+
+# Create vectors for source file URL (based on pattern and doc ID available in metadata table)
+# as well as destination locations for each file
+url <- paste0("https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId=", clean_test_set$CBA.File)
+dest_file <- paste0("/Users/dananestor/DACSS/Text as Data/Contract files/", clean_test_set$CBA.File, ".pdf")
+
+download.file(url, dest_file, method = 'libcurl', quiet = TRUE)
+```
+
+
+
+```{r OCR check}
+
+```
+

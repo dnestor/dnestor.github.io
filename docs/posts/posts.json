@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-03-10-text-as-data-post-2/",
+    "title": "Text as Data Post 2",
+    "description": "Scraping union contract data",
+    "author": [
+      {
+        "name": "Dana Nestor",
+        "url": "https://dnestor.github.io/"
+      }
+    ],
+    "date": "2022-03-10",
+    "categories": [],
+    "contents": "\n\n\nShow code\n\n# Read in table of available private sector CBAs, downloaded from DOL source\nmessy_contracts_table <- read.csv(\"/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-10-text-as-data-post-2/CBAList (2).csv\")\n\n# Remove contracts without metadata on industry or number of employees\nclean_contracts_table <- messy_contracts_table %>%\n  filter(NAICS. != is.na(NAICS.)) %>%\n  filter(X.Wrkrs != is.na(X.Wrkrs))\n\n\n\nNow number of observations is lowered from 2,623 to 1,854\n\n\nShow code\n\n# Create subset of docs to test scrape\nclean_test_set <- clean_contracts_table[1:10,]\n\nurl <- paste0(\"https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId=\", clean_test_set$CBA.File)\ndest_file <- paste0(\"/Users/dananestor/DACSS/Text as Data/Contract files/\", clean_test_set$CBA.File, \".pdf\")\n\ndownload.file(url, dest_file, method = 'libcurl', quiet = TRUE)\n\n\n\n\n\n\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-03-10T18:04:39-05:00",
+    "input_file": "text-as-data-post-2.knit.md"
+  },
+  {
     "path": "posts/2022-02-05-text1/",
     "title": "Text as Data Post 1",
     "description": "General outline of my proposed research topic with analysis on feasability and a brief literature review.",
