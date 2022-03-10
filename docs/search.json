@@ -6,14 +6,14 @@
       "description": "Some additional details about the blog",
       "author": [],
       "contents": "\nDana Nestor is a graduate student in Data Analytics and Computational Social Science at the University of Massachusetts Amherst. He has a bachelor’s degree in economics from New York University. Dana’s research interests include labor and development economics, program evaluation, and the spread of ideas. Some of his hobbies include gardening and architecture.\n\n\n\n",
-      "last_modified": "2022-03-10T18:25:18-05:00"
+      "last_modified": "2022-03-10T18:28:48-05:00"
     },
     {
       "path": "index.html",
       "title": "My Blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-03-10T18:25:19-05:00"
+      "last_modified": "2022-03-10T18:28:48-05:00"
     }
   ],
   "collections": ["posts/posts.json"]
