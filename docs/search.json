@@ -6,14 +6,14 @@
       "description": "Some additional details about the blog",
       "author": [],
       "contents": "\n\n\n\n\nDana Nestor is a graduate student in Data Analytics and Computational Social Science at the University of Massachusetts Amherst. His research leverages statistical modeling and bulk data processing to identify quantitative evidence that organizations can use to make informed decisions. This includes analysis of financial, network, textual, and survey data using machine techniques to determine programmatic impact and success.\nPrior to graduate school, Dana worked for over a decade in government, politics, and the nonprofit sector. He has experience in various positions as a federal appointee, at a global philanthropy, and on national and statewide campaigns.\nDana holds a bachelor’s degree in economics from New York University, where he studied policy, comparative politics, development, and political philosophy. Outside of the classroom, he enjoys gardening, woodworking, and spending time with his partner and their two cats.\n\n\n\n\n",
-      "last_modified": "2022-03-11T00:42:18-05:00"
+      "last_modified": "2022-03-11T00:53:14-05:00"
     },
     {
       "path": "index.html",
       "title": "My Blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-03-11T00:42:18-05:00"
+      "last_modified": "2022-03-11T00:53:11-05:00"
     }
   ],
   "collections": ["posts/posts.json"]
