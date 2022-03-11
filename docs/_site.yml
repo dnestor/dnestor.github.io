@@ -4,6 +4,7 @@ description: |
   Dana Nestor's blog for DACSS work
 output_dir: "."
 base_url: https://dnestor.github.io/
+theme: DACSSblog.css
 collections:
   posts:
     categories: TRUE

@@ -48,7 +48,7 @@ clean_test_set <- clean_contracts_table[1:10,]
 url <- paste0("https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId=", clean_test_set$CBA.File)
 dest_file <- paste0("/Users/dananestor/DACSS/Text as Data/Contract files/", clean_test_set$CBA.File, ".pdf")
 
-download.file(url, dest_file, method = 'libcurl', quiet = TRUE)
+# download.file(url, dest_file, method = 'libcurl', quiet = TRUE)
 ```
 
 
