@@ -7,53 +7,160 @@ author:
     url: https://dnestor.github.io/
     affiliation: UMASS DACSS
     affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program
-date: 03-10-2022
+date: 02-20-2022
 categories:
   - Text as Data
   - Web Scraping
-draft: TRUE
+draft: FALSE
 output:
   distill::distill_article:
     self_contained: false
-    code_folding: true
+    code_folding: TRUE
+    toc: TRUE
 ---
 
-
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(tidyverse)
+library(pdftools)
+library(fs)
 ```
 
+### Set Up
 
+Today we continue our project on union contract language by generating a set of data to turn into a corpus for analysis. This begins with identifying appropriate contracts to include. We then proceed to scrape these contracts, test them to see which have machine readable text, and sort those that do not into a separate folder for further processing.
 
-```{r read in and clean up metadata}
-# Read in table of available private sector CBAs, downloaded from DOL source
-messy_contracts_table <- read.csv("/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-10-text-as-data-post-2/CBAList (2).csv")
+To begin, an index is sourced from the US Department of Labor Office of Labor-Management Standards (OLMS) via their Online Public Disclosure Room. All 3,730 records are exported to a .CSV file, which is then read-in and filtered to include only private sector contracts. Given our research question, we are focusing on only private sector contracts as the public sector is not governed by the NLRA or overseen by the NLRB.
 
-# Remove contracts without metadata on industry or number of employees
+![Screen grab of OLMS Online Public Disclosure Room (OPDR) database of collective bargaining agreements \[@opdr\].](/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-10-text-as-data-post-2/Screen%20Shot%202022-04-03%20at%2020.43.16.png)
+
+```{r index}
+# Create index of of available CBAs; read in table downloaded from DOL source
+messy_contracts_table <- 
+  read.csv("/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-10-text-as-data-post-2/CBAList (2).csv")
+
+# Remove contracts in public sector
 clean_contracts_table <- messy_contracts_table %>%
-  filter(NAICS. != is.na(NAICS.)) %>%
-  filter(X.Wrkrs != is.na(X.Wrkrs))
+  filter(Type != "PUBLIC")
+
+# NOT DONE: remove records missing industry or number of workers
+# clean_contracts_table <- clean_contracts_table %>%
+  #filter(NAICS. != is.na(NAICS.)) %>%
+  #filter(X.Wrkrs != is.na(X.Wrkrs))
 ```
 
-Now number of observations is lowered from 2,623 to 1,854
+After filtering out public sector agreements, the number of records is lowered to 2,623. We considered removing any files that did not have meta-data available for industry or number of workers covered. However, this would eliminate approximately 800 records (nearly 30%) which is not insubstantial, so we decided against this. If this data is indeed necessary later we can attempt to impute it.
 
-```{r download files}
-# Create subset of docs to test scrape
-clean_test_set <- clean_contracts_table[1:10,]
+### Testing
 
-# Create vectors for source file URL (based on pattern and doc ID available in metadata table)
-# as well as destination locations for each file
-url <- paste0("https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId=", clean_test_set$CBA.File)
-dest_file <- paste0("/Users/dananestor/DACSS/Text as Data/Contract files/", clean_test_set$CBA.File, ".pdf")
+Given the large number of files to be pulled, it makes sense to do some testing before attempting a full-scale scrape of this database. Our final algorithm will include sections to download, test for machine readability, and sort contract files so we can split it into these three elements to test.
 
-# download.file(url, dest_file, method = 'libcurl', quiet = TRUE)
+We commence testing by subsetting our data. The .csv file we sourced from OLMS contains a variable for "CBA number" which turns out to be a unique identifier for each file. Additionally, the structure of the OPDR website utilizes a URL for each contract .PDF that only varies by this "CBA number" - thus, we can combine that variable with the URL stem to create a vector of URLs for our desired contracts.
+
+#### Download
+
+```{r test-download}
+# Subset docs to test scrape
+clean_test_set <- clean_contracts_table[1:100,]
+
+# Create vectors for source file URL and destination
+url_test <- paste0("https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId=", 
+                   clean_test_set$CBA.File)
+dest_file_test <- paste0("/Users/dananestor/DACSS/Text as Data/Contract files/", 
+                         clean_test_set$CBA.File, ".pdf")
+
+# NOT RUN: Download pdfs from DOL
+# download.file(url_test, dest_file_test, method = 'libcurl', quiet = TRUE)
 ```
 
+Once the data is subsetted into the first 100 contracts, we can create vectors for our test URLs and destination files based on the "CBA number" pattern. We then use the **download.file()** function - note the use of method = 'libcurl' which was essential in getting this process to work. This allows R to access "https://" sites and supports the simultaneous downloads provided by our vectors. Additionally, we set quiet = TRUE to suppress the number of messages as they can overwhelm RStudio.
 
+After testing, the first 100 files are successfully downloaded. At this point, we comment out the download.file function to prevent it from interfering as we iterate through the development of this post.
 
-```{r OCR check}
+#### Machine Readability
 
+Critically, we must ensure that the contracts we are downloading actually contain text for analysis. We turn to the ***pdftools*** library to accomplish this. Here, the **pdf_text()** function extracts character strings, returning a vector for each page in the document. These vectors can then be passed to the **str_detect()** function from the ***stringr*** package, which takes the RegEx input for one or more letters to return a new logical vector telling us whether (TRUE) or not (FALSE) any page of each contract contains machine readable text.
+
+We can test how this combination of functions handles our data by testing it on files of known quality. To do this, we hand-selected three files - one newer contract formatted with text, one contract that had been run through an optical character recognition program (OCR), and one that was not machine readable.
+
+```{r OCR-test}
+# Test string detection on file known to contain text
+test_obj_positive <- pdf_text("/Users/dananestor/DACSS/Text as Data/Contract files/2447.pdf")
+head(str_detect(test_obj_positive, "[:alpha:]+"))
+
+# Now on file known not to have text
+test_obj_negative <- pdf_text("/Users/dananestor/DACSS/Text as Data/Contract files/OCR/689.pdf")
+head(str_detect(test_obj_negative, "[:alpha:]+"))
+
+# Now on file showing odd characteristics
+test_obj_marginal <- pdf_text("/Users/dananestor/DACSS/Text as Data/Contract files/1803.pdf")
+head(str_detect(test_obj_marginal, "[:alpha:]+"))
 ```
 
+After running our functions on each document, we can see that it was able to correctly pick up the two .PDFs with text and identify the one without. Note that, for simplicity of output on the blog, the **head()** function has been applied. Initial explorations examined the entire vector returned.
+
+#### Sorting Loop
+
+The final piece of our algorithm is a loop that applies the previous test and automatically moves any files without machine readable text to a separate folder for further processing. This is accomplished with an *if* loop nested within a *for* loop - the *for* loop iterates through each file and the *if* loop moves the file should it fail the readability test. The essential function of this loop is accomplished with the **file_move()** function from the ***fs*** library.
+
+```{r loop-test, eval=FALSE}
+for (i in 1:length(dest_file_test)){
+  if(!(TRUE %in% #Test if any page in doc has one or more letter
+        str_detect(
+          pdf_text(dest_file_test[i]), 
+          "[:alpha:]+"))){ 
+        file_move( #If not, move to separate folder
+          dest_file_test[i], 
+          "/Users/dananestor/DACSS/Text as Data/Contract files/OCR")}
+}
+```
+
+While the loop looks a bit convoluted, it is relatively simple. The combination of **pdf_text()** and **str_detect()** previously discussed provides a logical vector noting whether any page in each document contains one or more letter. This vector is then evaluated by the "**TRUE %in%**" phrase to determine whether the logical TRUE is present. Because this phrase is preceded by **!** (and the whole argument is wrapped in parentheses), if TRUE is not present, the **file_move()** function is engaged and the contract is moved into our OCR folder for further processing.
+
+Testing shows that the loop is able to detect files without text, and successfully moves them to the desired folder.
+
+### Scraping Algorithm
+
+Now we can put all three elements together into our final algorithm. While testing, we noticed that the OLMS website will time out during the download phase if all files are not pulled within 60 seconds. To overcome this, we used a loop to split the download phase into 27 iterations of \~100 files each. Note that this includes a **print()** function as a progress heuristic so we can monitor which iteration we are on. Our *for/if* loop described earlier caps off the algorithm by removing any files without text.
+
+```{r algorithm, eval=FALSE}
+# Create vector of contracts and destinations
+url <- paste0("https://olmsapps.dol.gov/olpdr/GetAttachmentServlet?docId=", 
+              clean_contracts_table$CBA.File)
+dest_file <- paste0("/Users/dananestor/DACSS/Text as Data/Contract files/", 
+                    clean_contracts_table$CBA.File, ".pdf")
+
+# Segment to avoid timing out
+cuts <- cbind(seq(1,2623,100),seq(100,2700,100))
+cuts[27,2] = length(dest_file) #manually setting stop
+
+# Download files
+for (i in 1:(length(cuts)/2)){
+  print(i)
+  download.file(
+    url[cuts[i,1]:cuts[i,2]], 
+    dest_file[cuts[i,1]:cuts[i,2]], 
+    method = 'libcurl', 
+    quiet = TRUE)
+}
+
+# Test for text and move if OCR needed
+for (i in 1:length(dest_file)){
+  if(!(TRUE %in%
+        str_detect(
+          pdf_text(dest_file[i]), 
+          "[:alpha:]+"))){ 
+        file_move(
+          dest_file[i], 
+          "/Users/dananestor/DACSS/Text as Data/Contract files/OCR")}
+}
+```
+
+#### Results
+
+Using this algorithm, 2,621 contracts were successfully downloaded, totaling 6.75 GB of data. Of those, 371 (984 MB) were not machine readable and require further processing. Two files, CBA numbers 297 and 2212, were too large to download as part of the loop so were pulled down manually. Results were cross validated by examining the local folder and testing a number of randomly-selected files.
+
+### Bibliography
+
+*OLMS Online Public Disclosure Room*. Retrieved from <https://olmsapps.dol.gov/olpdr/?&_ga=2.149185590.1424332960.1649032027-354341244.1643300869#CBA%20Search/CBA%20Search/>
