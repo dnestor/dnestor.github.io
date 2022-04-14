@@ -1,0 +1,51 @@
+---
+title: "Text as Data Post 3"
+description: |
+  Fixes, corpus creation, and pre-processing
+author:
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
+date: 2022-03-06
+categories:
+  - Text as Data
+  - Pre-processing
+draft: TRUE
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: TRUE
+    toc: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(readtext)
+library(cleanNLP)
+library(tidytext)
+library(tidyverse)
+library(quanteda)
+```
+
+
+Problem - employer names not standardized
+
+Part of speech tagging Dependency parsing (Penn Treebank, Stanford CoreNLP\[cleanNLP\]) Tokenization
+
+Week 4 tutorial:
+
+# pull out the data we want
+
+myData \<- docvars(data_corpus_inaugural) head(myData) tail(myData)
+
+# now add the text to our data frame for running the annotation tool; column must be named `text`
+
+myData\$text \<- text
+
+annotated \<- cnlp_annotate(myData) head(annotated$token) head(annotated$document) annoData \<- left_join(annotated$document, annotated$token, by = "doc_id") head(annoData)
+
+# plot length of documents (in sentences) over time
+
+annoData %>% group_by(Year) %>% summarize(Sentences = max(sid)) %>% ggplot(aes(Year, Sentences)) + geom_line() + geom_smooth() + theme_bw()

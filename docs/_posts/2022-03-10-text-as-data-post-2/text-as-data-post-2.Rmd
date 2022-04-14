@@ -157,6 +157,10 @@ for (i in 1:length(dest_file)){
 }
 ```
 
+
+
+
+
 #### Results
 
 Using this algorithm, 2,621 contracts were successfully downloaded, totaling 6.75 GB of data. Of those, 371 (984 MB) were not machine readable and require further processing. Two files, CBA numbers 297 and 2212, were too large to download as part of the loop so were pulled down manually. Results were cross validated by examining the local folder and testing a number of randomly-selected files.

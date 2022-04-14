@@ -18,7 +18,7 @@ knitr::include_graphics("/Users/dananestor/DACSS/Blog/Untitled/docs/2018.08-Head
 
 Prior to graduate school, Dana worked for over a decade in government, politics, and the nonprofit sector. He has experience in various positions as a federal appointee, at a global philanthropy, and on national and statewide campaigns.
 
-Dana holds a bachelor’s degree in economics from New York University, where he studied policy, comparative politics, development, and political philosophy.  Outside of the classroom, he enjoys gardening, woodworking, and spending time with his partner and their two cats.
+Dana holds a bachelor’s degree in economics from New York University, where he studied policy, comparative politics, economic transition and integration, and political philosophy.  Outside of the classroom, he enjoys gardening, woodworking, and spending time with his partner and their two cats.
 :::
 
 

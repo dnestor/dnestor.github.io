@@ -7,7 +7,16 @@
     <description>Dana Nestor's blog for DACSS work
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 20 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Text as Data Post 2A</title>
+      <dc:creator>Dana Nestor</dc:creator>
+      <link>https://dnestor.github.io/posts/2022-02-27-text-as-data-post-2a</link>
+      <description>Fixes to file sorting and methodology update</description>
+      <category>Text as Data</category>
+      <guid>https://dnestor.github.io/posts/2022-02-27-text-as-data-post-2a</guid>
+      <pubDate>Sun, 27 Feb 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Text as Data Post 2</title>
       <dc:creator>Dana Nestor</dc:creator>

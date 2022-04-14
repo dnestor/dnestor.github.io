@@ -1,0 +1,199 @@
+---
+title: "Text as Data Post 2A"
+description: |
+  Fixes to file sorting and methodology update
+author:
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
+date: 2022-02-27
+categories:
+  - Text as Data
+draft: FALSE
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: TRUE
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(distill)
+library(readtext)
+library(tidyverse)
+```
+
+```{r invisible, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+# Because of some errors in process along the way, I had to set each chunk so it wouldn't evaluate when knit so as to avoid messing up my data frame; this code allows me to still include functionality in this post without going through each step again.
+contract_frame_hidden <- read_csv("/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-02-27-text-as-data-post-2a/temp_data")
+```
+
+
+### Fixes from Last Post
+
+After some additional testing and attempts to start extracting text and pre-processing, we noticed that some contracts were missing and others were corrupt and unreadable. This implies that our previous effort to sort files by machine-readability did not work as expected. Before moving on to creating a corpus, we must correct this error.
+
+We start by creating a new loop to sort our documents. This loop differs from the previous post in several key ways:
+
+-   In the initial *for* loop, we are now using the **seq_along()** function rather than **length()**. This helps avoid potential issues when the loop indexes rows so we can ensure all rows are included;
+
+-   We've added a **print()** function into the loop to check the loop's progress. Aside from adding a nice heuristic, this addition is essential as it will give us an idea of where the loop gets tripped up, thus showing which file we should inspect for corruption/other issues;
+
+-   Due to some issues with the ***pdftools*** package, we are now using the ***readtext*** library and function to extract text from each file. This problem was later resolved, but we decided to leave the function in to get some experience with additional packages. Note that the verbosity = 0 argument was used to reduce the number of errors printed for each file;
+
+-   We changed the threshold function used to determine if a file was machine-readable from **str_detect()** to **nchar()** paired with a logical operator. In the original loop, the **str_detect()** function ended up evaluating to TRUE even if a minimal amount of text was present. By using **nchar()** \< 100 as threshold criteria for moving a file, we are able to exclude any documents that clearly have too little text to be meaningful.
+
+```{r fixes, eval=FALSE}
+# Change read function, add progress metric, change match criteria
+for (i in seq_along(dest_file)){
+  print(i)
+  if(nchar(
+     readtext(
+       dest_file[i], verbosity = 0)$text) < 100){ 
+        file_move(
+          dest_file[i], 
+          "/Users/dananestor/DACSS/Text as Data/Contract files/OCR")}
+}
+
+# Remove corrupted PDFs
+dest_file <- dest_file[-492]
+dest_file <- dest_file[-1507]
+dest_file <- dest_file[-1551]
+dest_file <- dest_file[-c(2475,2476,2477)]
+dest_file <- dest_file[-2380]
+dest_file <- dest_file[-c(2491,2492)]
+dest_file <- dest_file[-c(2494,2495)]
+dest_file <- dest_file[-2544]
+```
+
+After running our new code, we find that 13 files are corrupt and remove them from the corpus, leaving 2,610 remaining. Of those files, 1,625 are not machine-readable, leaving only 985 in our corpus. Given the large number of documents removed, it is likely that we will have to add an OCR step to this project to ensure an appropriate sample size.
+
+### Text Extraction
+
+Now that we have our files sorted, we can move on to extracting text from each document so we can begin pre-processing.
+
+#### Initial Extraction
+
+To extract text, we must first start by creating a new list of machine-readable files to use for our corpus. We use two different arrangements of the **list.files()** function to extract the file path and unique contract number of each document. These vectors later will be used in our loop to locate our target documents and add their unique identifiers to our data frame.
+
+We must also figure out how to create a single string of text for each document as **readtext()** returns a list with each text box in the document representing an entry. After some testing, we find that the **paste()** function with sep = ' ' and collapse = ' ' easily accomplishes this task.
+
+Finally, we construct an empty dataframe and loop in the document text, unique identifier, and number of pages (which will become important in the next step).
+
+```{r extraction, eval=FALSE}
+# Create list of all machine readable files
+corpus_files <- list.files("/Users/dananestor/DACSS/Text as Data/Contract files", 
+                           pattern = "pdf$", full.names = TRUE)
+corpus_file_names <- list.files("/Users/dananestor/DACSS/Text as Data/Contract files", 
+                                pattern = "pdf$") %>%
+                    str_remove_all(".pdf")
+
+# Test extraction, reduce vector elements to one for each contract
+contract_vector_test <- 
+  paste(
+    readtext(corpus_files[1])[2], 
+  sep = '', collapse = '')
+
+# Create empty data frame 
+contract_frame <- tibble("a","b","c")
+colnames(contract_frame) <- c("contract", "text", "pages")
+
+# Loop for adding contract number, document text, and page numbers
+for (i in seq_along(corpus_files)){
+  print(i)
+  contract_frame[i,1] <- corpus_file_names[i]
+  contract_frame[i,2] <- 
+    paste(
+      readtext(
+        corpus_files[i])[2], 
+    sep = '', collapse = '')
+  contract_frame[i,3] <- pdf_info(corpus_files[i])$pages
+}
+head(contract_frame)
+```
+
+```{r hidden, echo=FALSE}
+head(contract_frame_hidden[,c(1,9,8)])
+```
+
+Once the loop is complete - it takes a few minutes as the text extraction is somewhat computationally expensive given the size of the documents - we examine the new data frame and find it has the expected number of observations (985), columns (3), and that the data all appears in the correct location.
+
+#### Further Readability Cleanup
+
+While examining our new dataframe of text strings and meta-data we notice that a number of rows contain what appears to be no text, but when printed show a pattern of escaped characters "\\n". Further inspection shows these rows to be documents with more than 100 pages and that the "\\n" pattern repeats exactly (number of pages) - 1 times. We assume that this is a remnant of the **readtext()** function, where "\\n" is inserted if a page contains no readable characters. Because this subset of documents had more than 100 pages, the pattern repeated more than 100 times and thus was not caught initially by our **nchar()** \< 100 filter.
+
+As a workaround for this issue, we capitalize on the pattern outlined above and filter all observations where the number of characters is equal to (number of pages) - 1. The file path for each row is then added to a vector, and those files are moved in with the other documents that need to be OCR'ed.
+
+```{r cleanup, eval=FALSE}
+# Remove more non-OCR'ed documents
+contract_frame_test <- contract_frame %>%
+  filter(nchar(contract_frame$text) == pages - 1)
+contract_frame_rm <- paste0("/Users/dananestor/DACSS/Text as Data/Contract files/", 
+                    contract_frame_test$contract, ".pdf")
+file_move(contract_frame_rm, 
+          "/Users/dananestor/DACSS/Text as Data/Contract files/OCR")
+
+
+# Remove rows for non-OCR'ed documents
+contract_frame <- contract_frame %>%
+  filter(nchar(contract_frame$text) != pages - 1)
+```
+
+This process yielded 288 additional non-readable files and our corpus now stands at 697 documents.
+
+#### Meta-data
+
+While we already added the unique contract number and number of pages to our dataframe, there are still a number of meta-data variables that we are missing. These variables offer rich information about our documents - such as employer and union names, industry, location, and number of workers - that will be useful in the future.
+
+Before moving on to corpus creation, we first take a moment to add these meta-data variables via a left-join. A left-join indexes two dataframes via specified matching criteria, allowing for a mapping of rows across two frames with different structures. In our case, we used the **left_join()** function and matching criteria specifying that the unique identifier in each dataset should be used for the index (contract in the corpus_files object and CBA.File in the clean_contracts_table object).
+
+Once a row from the first frame (in our case, the slimmed down corpus_files object) matches a row in the second frame (the master clean_contracts_table object of all files we initially downloaded), any columns from the second frame that do not exist in the first are appended to that first frame. This leaves one dataframe with all variables but only for the desired rows specified in that first frame.
+
+```{r meta-data, eval=FALSE}
+# Convert unique ID to integer for join 
+contract_frame$contract <- as.integer(contract_frame$contract)
+
+# Pull in meta-data using join, remove duplicate columns, filter for only employers w/2+ contracts
+contract_frame <- 
+  left_join(contract_frame, 
+            clean_contracts_table, 
+            by = c("contract" = "CBA.File")) %>%
+  select(
+    c(contract, Employer.Name, Union, Location, Expiration.Date, NAICS., X.Wrkrs, pages, text)) 
+```
+
+Once the left join is complete, we visually inspect it to ensure consistency of data (in this case, matching the employer and union from the text string to the Employer.Name and Union variables). Then, we re-arrange the columns using the select() function to remove duplicate variables and create a more orderly table.
+
+```{r cloaked, echo=FALSE}
+head(contract_frame_hidden)
+```
+
+### Methodology Update
+
+After further consideration and consultation about our research question and available data, we decided that a change was needed in our original methodological plan. One initial concern with this project was possible bias introduced into the data via organizations with more than one contract in the corpus being over-represented. This could skew our findings by giving greater weight to the language used by those organizations.
+
+An additional avenue for potential co-linearity was suggested by Prof. Rice. He pointed out that, because substantial portions of these contracts could be similar (regardless of the number of submissions by the employer), our model may end up picking up that similarity and miss the more subtle latent topics that we are trying to detect. This could be resolved by subsetting documents that are substantially similar into categories, then comparing change within each category.
+
+One final concern was in looking at changes to the corpus over time. Because time-series analysis implies a natural ordering that leads to correlation between observations, we needed to find a way to de-correlate our documents to ensure an accurate model. Prof. Song suggested an excellent work-around where, instead of looking at changes across the corpus and over the period of time covered by the corpus, we should pick a key case and look at contracts in-effect before and after to identify potential changes. We decided to move forward with this modification.
+
+Taken together, it becomes clear that further organization and subsetting of our data is necessary to avoid validity issues down the line. To accomplish this, we can harness a quirk of the data we already identified - multiple submissions from individual employers. We an filter out any documents that do not fit this pattern, and then analyze how the contracts *for each employer* changed before and after our key case. This eliminates any correlation or collinearity within the data, and has the added benefit of making our model more interpretable as it tracks change at the firm- rather than corpus-level.
+
+```{r grouping, eval=FALSE}
+contract_frame <- contract_frame %>%
+  group_by(Employer.Name) %>%
+  filter(n() >= 2)
+```
+
+After grouping and filtering, we find that our corpus now stands at 186 documents.
+
+#### Grouping Considerations
+
+One decision considered during this process was whether to group documents only by the employer name, or to create a new variable that combines the employer and union for a more fine-grained analysis at the negotiator level. The thinking was that the former could give insight into how an employer thinks about labor contracts, while the latter could give greater context to the results of negotiations between specific parties.
+
+Because the research question focuses on employer motivations and the coarser grouping left us with so few documents, we decided to go with the former option. However, if we get more documents OCR'ed and added to the corpus, we would like to perform analysis at both levels to see if/how things change. We also feel that this could be a potential method for cross-validation: if the same firm, while negotiating with different unions in different contexts, insists on an addition to all contracts, this implies some level of corporate strategy when it comes to labor contracts.
+
+### Conclusion
+
+After running the updated loop initially, it became clear that an iterative process would be necessary as there were a number of files that were either corrupt or so large that they appeared corrupt in our code output. This was quite labor intensive as it required resetting and re-running a slow function (the loop itself) after each corrupt file was identified which took a significant amount of time. In the future, it would be best to update this part of the methodology with a more powerful loop that cuts out some of these steps.  
