@@ -141,7 +141,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["clean_contracts_table.csv","contract_frame.csv","date_grouped_subset.png","date_original.png","date_subset.png","references.bib","subset_wordcloud_initial.png","text-as-data-post-3_files/anchor-4.2.2/anchor.min.js","text-as-data-post-3_files/bowser-1.9.3/bowser.min.js","text-as-data-post-3_files/distill-2.2.21/template.v2.js","text-as-data-post-3_files/figure-html5/dates-1.png","text-as-data-post-3_files/figure-html5/dates-2.png","text-as-data-post-3_files/figure-html5/dates-3.png","text-as-data-post-3_files/figure-html5/industries-1.png","text-as-data-post-3_files/figure-html5/regions-1.png","text-as-data-post-3_files/header-attrs-2.13/header-attrs.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.map","text-as-data-post-3_files/kePrint-0.0.1/kePrint.js","text-as-data-post-3_files/lightable-0.0.1/lightable.css","text-as-data-post-3_files/popper-2.6.0/popper.min.js","text-as-data-post-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","text-as-data-post-3_files/tippy-6.2.7/tippy-light-border.css","text-as-data-post-3_files/tippy-6.2.7/tippy.css","text-as-data-post-3_files/tippy-6.2.7/tippy.umd.min.js","text-as-data-post-3_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["clean_contracts_table.csv","contract_frame.csv","date_grouped_subset.png","date_original.png","date_subset.png","industry_subset.png","references.bib","regions_duplex.png","subset_wordcloud_initial.png","text-as-data-post-3_files/anchor-4.2.2/anchor.min.js","text-as-data-post-3_files/bowser-1.9.3/bowser.min.js","text-as-data-post-3_files/distill-2.2.21/template.v2.js","text-as-data-post-3_files/header-attrs-2.13/header-attrs.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.map","text-as-data-post-3_files/kePrint-0.0.1/kePrint.js","text-as-data-post-3_files/lightable-0.0.1/lightable.css","text-as-data-post-3_files/popper-2.6.0/popper.min.js","text-as-data-post-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","text-as-data-post-3_files/tippy-6.2.7/tippy-light-border.css","text-as-data-post-3_files/tippy-6.2.7/tippy.css","text-as-data-post-3_files/tippy-6.2.7/tippy.umd.min.js","text-as-data-post-3_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -2023,14 +2023,18 @@ Show code
       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, 
                    hjust<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://wilkelab.org/cowplot/reference/plot_grid.html'>plot_grid</a></span><span class='op'>(</span><span class='va'>states_subset</span>, 
+<span class='va'>regions_duplex</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://wilkelab.org/cowplot/reference/plot_grid.html'>plot_grid</a></span><span class='op'>(</span><span class='va'>states_subset</span>, 
           <span class='va'>regions_subset</span>, 
           rel_widths <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.25</span>,<span class='fl'>.75</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"regions_duplex.png"</span>, <span class='va'>regions_duplex</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
-<p><img src="text-as-data-post-3_files/figure-html5/regions-1.png" width="624" /></p>
 </div>
+<figure>
+<img src="regions_duplex.png" alt="States and Regions" /><figcaption aria-hidden="true">States and Regions</figcaption>
+</figure>
 <p>In examining the results, we can see that Alaska, Indiana, and Missouri have much higher numbers of contracts relative to other states than their populations would suggest. Similarly, the regions plot shows that the Northeast seems to be underrepresented relative to the other regions. This should be taken into account in any analysis, and we may need to control for it as we continue data exploration.</p>
 <h4 id="industry-distribution">Industry Distribution</h4>
 <p>Finally, we look at distribution across industry within our subset. One of the papers we are relying on for the formulation of this methodology - Ash, et. al. <span class="citation" data-cites="ash2019">(<a href="#ref-ash2019" role="doc-biblioref">Ash, MacLeod, and Naidu 2019</a>)</span> - found significant results when comparing their findings across industries so it is important not only to have this information available, but to see how it is represented in our data.</p>
@@ -2097,12 +2101,15 @@ Show code
             angle <span class='op'>=</span> <span class='va'>label_data</span><span class='op'>$</span><span class='va'>angle</span>, 
             inherit.aes <span class='op'>=</span> <span class='cn'>FALSE</span>, 
             nudge_y <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> 
-<span class='va'>industry_subset</span> 
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"industry_subset.png"</span>, <span class='va'>industry_subset</span><span class='op'>)</span>
 </code></pre>
 </div>
 </details>
-<p><img src="text-as-data-post-3_files/figure-html5/industries-1.png" width="624" /></p>
 </div>
+<figure>
+<img src="%22industry_subset.png%22" alt="Industry" /><figcaption aria-hidden="true">Industry</figcaption>
+</figure>
 <p>After adding more industry information to our data, we chart the count of contracts in our subset in each sector using a circular barplot (h/t to the R Graph Gallery, <span class="citation" data-cites="holtz">(<a href="#ref-holtz" role="doc-biblioref">Holtz, n.d.</a>)</span>). This shows what we would expect based on subject area knowledge - the construction and manufacturing industries are heavily represented, while most others have only a few contracts in our subset. This may be useful information as we move through analysis.</p>
 <h3 id="corpus-creation">Corpus Creation</h3>
 <p>Now that we understand our data better, it is time to start processing the contract text so we can start analysis. We begin with the creation of a corpus. Using the <strong>corpus()</strong> function in the <strong><em>quanteda</em></strong> package, we are able to easily extract the text from our data frame and convert it into a useable corpus object. We also use the <strong>summary()</strong> function to create a corpus summary object and explore the dimensions of our text data.</p>

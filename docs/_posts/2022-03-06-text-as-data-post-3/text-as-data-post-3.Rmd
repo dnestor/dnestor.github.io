@@ -247,10 +247,14 @@ regions_subset <- contract_frame %>% #plot by region
       element_text(angle = 45, 
                    hjust=1))
 
-plot_grid(states_subset, 
+regions_duplex <- plot_grid(states_subset, 
           regions_subset, 
           rel_widths = c(2.25,.75))
+
+ggsave("regions_duplex.png", regions_duplex)
 ```
+
+![States and Regions](regions_duplex.png)
 
 In examining the results, we can see that Alaska, Indiana, and Missouri have much higher numbers of contracts relative to other states than their populations would suggest. Similarly, the regions plot shows that the Northeast seems to be underrepresented relative to the other regions. This should be taken into account in any analysis, and we may need to control for it as we continue data exploration.
 
@@ -317,8 +321,11 @@ industry_subset <- label_data %>% #plot by industry
             angle = label_data$angle, 
             inherit.aes = FALSE, 
             nudge_y = 5) 
-industry_subset 
+
+ggsave("industry_subset.png", industry_subset)
 ```
+
+![Industry]("industry_subset.png")
 
 After adding more industry information to our data, we chart the count of contracts in our subset in each sector using a circular barplot (h/t to the R Graph Gallery, [@holtz]). This shows what we would expect based on subject area knowledge - the construction and manufacturing industries are heavily represented, while most others have only a few contracts in our subset. This may be useful information as we move through analysis.  
 
