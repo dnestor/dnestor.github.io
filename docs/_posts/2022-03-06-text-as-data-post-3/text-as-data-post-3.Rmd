@@ -8,6 +8,8 @@ author:
     affiliation: UMASS DACSS
     affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
 date: 2022-03-06
+base_url: https://dnestor.github.io/posts/2022-03-06-text-as-data-post-3/
+preview: images/subset_wordcloud_initial.png
 categories:
   - Text as Data
   - Data Exploration
@@ -326,7 +328,7 @@ After adding more industry information to our data, we chart the count of contra
 
 Now that we understand our data better, it is time to start processing the contract text so we can start analysis. We begin with the creation of a corpus. Using the **corpus()** function in the ***quanteda*** package, we are able to easily extract the text from our data frame and convert it into a useable corpus object. We also use the **summary()** function to create a corpus summary object and explore the dimensions of our text data.
 
-```{r corpus}
+```{r corpus, cache = TRUE}
 contract_corpus <- corpus(contract_frame$text)
 contract_corpus_summary <- summary(contract_corpus, n = Inf)
 
