@@ -85,11 +85,32 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Text as Data Post 3</title>
 
-  <meta property="description" itemprop="description" content="Fixes, corpus creation, and pre-processing"/>
+  <meta property="description" itemprop="description" content="Data exploration, corpus creation, and pre-processing"/>
 
 
   <!--  https://schema.org/Article -->
@@ -100,24 +121,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Text as Data Post 3"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Fixes, corpus creation, and pre-processing"/>
+  <meta property="og:description" content="Data exploration, corpus creation, and pre-processing"/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Text as Data Post 3"/>
-  <meta property="twitter:description" content="Fixes, corpus creation, and pre-processing"/>
+  <meta property="twitter:description" content="Data exploration, corpus creation, and pre-processing"/>
 
   <!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Circular Barplot | the R Graph Gallery;citation_author=Yan Holtz"/>
+  <meta name="citation_reference" content="citation_title=Circular Barplot | the R Graph Gallery;citation_author=Yan Holtz"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","draft","output"]}},"value":[{"type":"character","attributes":{},"value":["Text as Data Post 3"]},{"type":"character","attributes":{},"value":["Fixes, corpus creation, and pre-processing\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Dana Nestor"]},{"type":"character","attributes":{},"value":["https://dnestor.github.io/"]},{"type":"character","attributes":{},"value":["UMASS DACSS"]},{"type":"character","attributes":{},"value":["https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about"]}]}]},{"type":"character","attributes":{},"value":["2022-03-06"]},{"type":"character","attributes":{},"value":["Text as Data","Pre-processing"]},{"type":"logical","attributes":{},"value":[true]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","draft","output","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Text as Data Post 3"]},{"type":"character","attributes":{},"value":["Data exploration, corpus creation, and pre-processing\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Dana Nestor"]},{"type":"character","attributes":{},"value":["https://dnestor.github.io/"]},{"type":"character","attributes":{},"value":["UMASS DACSS"]},{"type":"character","attributes":{},"value":["https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about"]}]}]},{"type":"character","attributes":{},"value":["2022-03-06"]},{"type":"character","attributes":{},"value":["Text as Data","Data Exploration","Pre-processing"]},{"type":"logical","attributes":{},"value":[true]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["references.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"NULL"}
+  {"type":"character","attributes":{},"value":["clean_contracts_table.csv","contract_frame.csv","date_grouped_subset.png","date_original.png","date_subset.png","references.bib","subset_wordcloud_initial.png","text-as-data-post-3_files/anchor-4.2.2/anchor.min.js","text-as-data-post-3_files/bowser-1.9.3/bowser.min.js","text-as-data-post-3_files/distill-2.2.21/template.v2.js","text-as-data-post-3_files/figure-html5/dates-1.png","text-as-data-post-3_files/figure-html5/dates-2.png","text-as-data-post-3_files/figure-html5/dates-3.png","text-as-data-post-3_files/figure-html5/industries-1.png","text-as-data-post-3_files/figure-html5/regions-1.png","text-as-data-post-3_files/header-attrs-2.13/header-attrs.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.js","text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.map","text-as-data-post-3_files/kePrint-0.0.1/kePrint.js","text-as-data-post-3_files/lightable-0.0.1/lightable.css","text-as-data-post-3_files/popper-2.6.0/popper.min.js","text-as-data-post-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","text-as-data-post-3_files/tippy-6.2.7/tippy-light-border.css","text-as-data-post-3_files/tippy-6.2.7/tippy.css","text-as-data-post-3_files/tippy-6.2.7/tippy.umd.min.js","text-as-data-post-3_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1439,6 +1463,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="text-as-data-post-3_files/header-attrs-2.13/header-attrs.js"></script>
+  <script src="text-as-data-post-3_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="text-as-data-post-3_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="text-as-data-post-3_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="text-as-data-post-3_files/popper-2.6.0/popper.min.js"></script>
   <link href="text-as-data-post-3_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1459,7 +1485,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Text as Data Post 3","description":"Fixes, corpus creation, and pre-processing","authors":[{"author":"Dana Nestor","authorURL":"https://dnestor.github.io/","affiliation":"UMASS DACSS","affiliationURL":"https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about","orcidID":""}],"publishedDate":"2022-03-06T00:00:00.000-05:00","citationText":"Nestor, 2022"}
+{"title":"Text as Data Post 3","description":"Data exploration, corpus creation, and pre-processing","authors":[{"author":"Dana Nestor","authorURL":"https://dnestor.github.io/","affiliation":"UMASS DACSS","affiliationURL":"https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about","orcidID":""}],"publishedDate":"2022-03-06T00:00:00.000-05:00","citationText":"Nestor, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1473,10 +1499,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_categories-->
 <div class="dt-tags">
 <div class="dt=tag">Text as Data</div>
+<div class="dt=tag">Data Exploration</div>
 <div class="dt=tag">Pre-processing</div>
 </div>
 <!--/radix_placeholder_categories-->
-<p><p>Fixes, corpus creation, and pre-processing</p></p>
+<p><p>Data exploration, corpus creation, and pre-processing</p></p>
 </div>
 
 <div class="d-byline">
@@ -1490,23 +1517,781 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#pull-out-the-data-we-want">pull out the data we want</a></li>
-<li><a href="#now-add-the-text-to-our-data-frame-for-running-the-annotation-tool-column-must-be-named-text">now add the text to our data frame for running the annotation tool; column must be named <code>text</code></a></li>
-<li><a href="#plot-length-of-documents-in-sentences-over-time">plot length of documents (in sentences) over time</a></li>
+<li><a href="#data-exploration">Data Exploration</a></li>
+<li><a href="#corpus-creation">Corpus Creation</a></li>
+<li><a href="#pre-processing-from-corpus-to-dfm">Pre-processing: from Corpus to DFM</a></li>
 </ul>
 </nav>
 </div>
-<p>Problem - employer names not standardized</p>
-<p>Part of speech tagging Dependency parsing (Penn Treebank, Stanford CoreNLP<span class="math display">\[cleanNLP\]</span>) Tokenization</p>
-<p>Week 4 tutorial:</p>
-<h1 id="pull-out-the-data-we-want">pull out the data we want</h1>
-<p>myData &lt;- docvars(data_corpus_inaugural) head(myData) tail(myData)</p>
-<h1 id="now-add-the-text-to-our-data-frame-for-running-the-annotation-tool-column-must-be-named-text">now add the text to our data frame for running the annotation tool; column must be named <code>text</code></h1>
-<p>myData$text &lt;- text</p>
-<p>annotated &lt;- cnlp_annotate(myData) head(annotated<span class="math inline">\(token) head(annotated\)</span>document) annoData &lt;- left_join(annotated<span class="math inline">\(document, annotated\)</span>token, by = “doc_id”) head(annoData)</p>
-<h1 id="plot-length-of-documents-in-sentences-over-time">plot length of documents (in sentences) over time</h1>
-<p>annoData %&gt;% group_by(Year) %&gt;% summarize(Sentences = max(sid)) %&gt;% ggplot(aes(Year, Sentences)) + geom_line() + geom_smooth() + theme_bw()</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/knitr/'>knitr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/juliasilge/tidytext'>tidytext</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://quanteda.io'>quanteda</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>quanteda.textplots</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://wilkelab.org/cowplot/'>cowplot</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/keberwein/blscrapeR'>blscrapeR</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://wilkelab.org/ggridges/'>ggridges</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Read in data created in last post</span>
+<span class='va'>clean_contracts_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span>
+  <span class='st'>"/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-06-text-as-data-post-3/clean_contracts_table.csv"</span>,
+  show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>contract_frame</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span>
+  <span class='st'>"/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-06-text-as-data-post-3/contract_frame.csv"</span>,
+  show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Employer.Name</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<h3 id="data-exploration">Data Exploration</h3>
+<p>Now that our files are sorted, text is extracted, and meta-data is gathered, we can proceed to explore the characteristics of the information that we seek to analyze. In this post, we will examine the key players in our inquiry - employers and unions - to understand how they are represented in our data. We will then walk through the creation of a corpus and pre-processing of text necessary to move on to modelling and further study.</p>
+<h4 id="employers-and-unions">Employers and Unions</h4>
+<p>One major assumption in the methodology discussed in <a href="https://dnestor.github.io/posts/2022-02-27-text-as-data-post-2a/">Post 2A</a> is a sufficient number of employers with contracts before and after our key case to provide a statistically significant sample - too few, and it is likely that the data will lack the subtlety necessary to detect the semantic changes at issue. We can investigate the effects that cleaning our data and imposing this methodology have had on sample size by examining the original data obtained from OLMS and our subset consisting of employers with more than two machine-readable contracts.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Create table to show number of employers and unions</span>
+<span class='va'>stats_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span> 
+  <span class='st'>"Rows"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <span class='st'>"Number of Employers"</span>, 
+    <span class='st'>"Number of Unions"</span><span class='op'>)</span>, 
+  <span class='st'>"Subset"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/n_distinct.html'>n_distinct</a></span><span class='op'>(</span><span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Employer.Name</span><span class='op'>)</span>, 
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/n_distinct.html'>n_distinct</a></span><span class='op'>(</span><span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Union</span><span class='op'>)</span><span class='op'>)</span>, 
+  <span class='st'>"Original"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/n_distinct.html'>n_distinct</a></span><span class='op'>(</span><span class='va'>clean_contracts_table</span><span class='op'>$</span><span class='va'>Employer.Name</span><span class='op'>)</span>, 
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/n_distinct.html'>n_distinct</a></span><span class='op'>(</span><span class='va'>clean_contracts_table</span><span class='op'>$</span><span class='va'>Union</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames</a></span><span class='op'>(</span><span class='st'>"Rows"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>stats_table</span>, 
+      caption <span class='op'>=</span> <span class='st'>'Employers and Unions Across Data Sorting'</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hover"</span><span class='op'>)</span>, 
+                full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:stats">Table 1: </span>Employers and Unions Across Data Sorting
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Subset
+</th>
+<th style="text-align:right;">
+Original
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Number of Employers
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+2022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of Unions
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1409
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A quick check of the number of unique employers in the original data set vs. the subset shows a reduction from 2022 to 74, which is a 96% decrease. Unions show a similar drop off, though slightly lower at a reduction of 93%.</p>
+<p>While this is a concerning reduction, we need more information to determine the best course of action. Even a small number of employers can allow for a result as long as each has a sufficient number of contracts to detect changes in our measurements. Next, we pull out the top employers and unions as ranked by the number of contracts in our subset to see if this may be the case.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Lists of top 10 employers and unions in subset</span>
+<span class='va'>top_employers</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>top_employers</span>, 
+      caption <span class='op'>=</span> <span class='st'>'Top 10 Employers in Subset'</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hover"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:top-emp">Table 2: </span>Top 10 Employers in Subset
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Employer.Name
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+BUILDERS’ ASSOCIATION OF MO
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AGC, AK
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AGC, WA
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ROADS BRIDGES &amp; AIRPORTS
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ALPHA-OMEGA CHANGE ENGINEERING, INC (AOCE)
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ASSOCIATED BUILDING CONTRACTORS OF LAFAYETTE, INC (CEMENT MASONS)
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CALIFORNIA PROCESSORS INC.
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TRAINING, REHABILITATION AND DEVELOPMENT INSTITUTE INC.
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AGC, MN (HVY-HWY-RR)
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AMERICAN NATIONAL INSURANCE COMPANY
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>While not ideal, we can see that there are eight employers with four or more contracts in the subset, meaning that they could have two before and after the key case.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>top_unions</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Union</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+
+<span class='va'>top_unions</span><span class='op'>$</span><span class='va'>Union</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_trunc.html'>str_trunc</a></span><span class='op'>(</span><span class='va'>top_unions</span><span class='op'>$</span><span class='va'>Union</span>, <span class='fl'>40</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>top_unions</span>, 
+      caption <span class='op'>=</span> <span class='st'>'Top 10 Unions in Subset'</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hover"</span>, <span class='st'>"responsive"</span><span class='op'>)</span>, 
+                full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:top-unions">Table 3: </span>Top 10 Unions in Subset
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Union
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+PLASTERERS AND CEMENT MASONS AFL-CIO …
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ENGINEERS, OPERATING, AFL-CIO (IUOE) …
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OPCMIA LOCAL 692
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BOILERMAKERS AFL-CIO (BBF) LODGE 104
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ELECTRICAL WORKERS IBEW AFL-CIO (IBEW…
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ENGINEERS, OPERATING, AFL-CIO (IUOE) …
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IRON WORKERS AFL-CIO (BSOIW) LOCAL UN…
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LABORERS (LIUNA) LOCAL UNION 110/LAB…
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MACHINISTS AFL-CIO (IAM) LODGE 2003
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PLASTERERS AND CEMENT MASONS AFL-CIO …
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Unions in the subset offer fewer overall individuals with four or more contracts, but two of them have 10 or more which could be useful for a very specific dive into changes over time.</p>
+<p>One notable finding when examining the top employers and unions is the lack of consistency in naming conventions. For example, the trade association AGC appears multiple times in the top 10 entries of employers, with each instance representing a chapter in a different region. Similarly, in the union data, we see different entries for local chapters of different unions, such as the International Union of Operating Engineers. However, it is unclear whether this is a positive or negative characteristic.</p>
+<p>On the one hand, combining regional entities into one organization may allow for higher sensitivity in detecting topics given the small sample size if the assumption is made that strategy related to federal labor law will be coordinated centrally. Alternately, this may make it more difficult to detect (and possibly control for) regional variations in contracts motivated by state-level labor law. We must take this into account when modelling and developing an iterative analysis to critically understand how the judicial environment might influence labor contracts.</p>
+<h4 id="expiration-date-distribution">Expiration Date Distribution</h4>
+<p>To pick a court case that would allow for the analysis proposed in this project, we can look at the distribution of expiration dates to see at minimum what range we should consider. Hopefully we will find a multi-modal distribution that would clearly indicate the farthest back to look, given the assumption that contracts expiring before a case will not be influenced by it.</p>
+<p>Note that this rests on a somewhat weak assumption that contracts expiring after the case we pick will have been drafted after the case was decided. This is obviously not guaranteed. However, because we do not have meta-data available on the effective date of the contract, we will have to use this variable as our best approximation. This is an area for methodological improvement in the future.</p>
+<p>We’ll start by plotting the number of contracts expiring per-year in our subset to see if any patterns emerge.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Format dates as M/D/Y</span>
+<span class='va'>clean_contracts_table</span><span class='op'>$</span><span class='va'>Expiration.Date</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://lubridate.tidyverse.org/reference/ymd.html'>mdy</a></span><span class='op'>(</span><span class='va'>clean_contracts_table</span><span class='op'>$</span><span class='va'>Expiration.Date</span><span class='op'>)</span> 
+<span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Expiration.Date</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://lubridate.tidyverse.org/reference/ymd.html'>mdy</a></span><span class='op'>(</span><span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Expiration.Date</span><span class='op'>)</span>
+
+<span class='co'># Expiration date distro plots</span>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen <span class='op'>=</span> <span class='fl'>999</span><span class='op'>)</span> <span class='co'>#suppress scientific notation</span>
+
+<span class='va'>date_subset</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span> <span class='co'>#plot count by date in subset</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>contract_frame</span>, 
+         <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>Expiration.Date</span><span class='op'>)</span><span class='op'>)</span>, 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>Expiration.Date</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_step</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>scale_x_date</a></span><span class='op'>(</span>
+    name <span class='op'>=</span> <span class='st'>"Expiration Date"</span>, 
+    date_labels <span class='op'>=</span> <span class='st'>"%b-%y"</span>, 
+    date_breaks <span class='op'>=</span> <span class='st'>"4 year"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"date_subset.png"</span>, <span class='va'>date_subset</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<figure>
+<img src="date_subset.png" alt="Subset" /><figcaption aria-hidden="true">Subset</figcaption>
+</figure>
+<p>Examining this chart, we can see that there appear to be spikes around 2012, 2014, 2015, and 2017. It also shows a number of contracts expiring before 2012, and that our data is limited when it comes to contracts expiring after 2018. Given this information, we may want to search for a case decided in 2011 or 2012 to ensure that we have enough data points on either side.</p>
+<p>This plot also leads us to wonder if our original data set would offer a more informative distribution (thus supporting the work to further OCR documents). To check, we create the same plot but with our original data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>date_original</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span> <span class='co'>#plot count by date in original</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>clean_contracts_table</span>, 
+         <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>Expiration.Date</span><span class='op'>)</span><span class='op'>)</span>, 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>Expiration.Date</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_step</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>scale_x_date</a></span><span class='op'>(</span>
+    name <span class='op'>=</span> <span class='st'>"Expiration Date"</span>, 
+    date_labels <span class='op'>=</span> <span class='st'>"%b-%y"</span>, 
+    date_breaks <span class='op'>=</span> <span class='st'>"4 year"</span>, 
+    limit <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='st'>"2000-01-01"</span><span class='op'>)</span>, <span class='co'>#reduce x-axis for interpretability</span>
+              <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='st'>"2028-01-01"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> 
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"date_original.png"</span>, <span class='va'>date_original</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<figure>
+<img src="date_original.png" alt="Original" /><figcaption aria-hidden="true">Original</figcaption>
+</figure>
+<p>Here we see a very different distribution - unsurprisingly, there are many more observations in each peak. But the range has also expanded to include many more contemporary documents. Moreover, we can see that the largest peak on the subset graph - occurring in 2012 - is quite a bit smaller than the largest peaks in our original data. And, as we had initially hoped, this distribution appears bi-modal, showing a large proportion of contracts expiring before 2010 and after 2018, which could provide a very interesting gap to investigate for a court case.</p>
+<p>Taken together, the evidence mounts for increasing our sample size. However, in the absence of time, we are at least on somewhat stable ground in looking for cases around 2011 or 2012.</p>
+<p>This data only shows us a distribution relative to the entire corpus, however, and since we are proposing an analysis across employers to try and control for covariance, we need to tie our visualizations to employers specifically. This way, we can see where each employer falls in terms of when their contracts represented in our corpus expire. Again, ideally this would show a multi-modal distribution for at least a few employers so we can be sure that our analysis will incorporate data representative of our research question.</p>
+<p>To proceed, we graph the distribution of expiration dates within our subset, but grouped by employer.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>date_grouped_subset</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span> <span class='co'># plot distro by employer</span>
+  <span class='va'>contract_frame</span>, 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Expiration.Date</span>, 
+      y <span class='op'>=</span> <span class='va'>Employer.Name</span>, 
+      fill <span class='op'>=</span> <span class='va'>Employer.Name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://wilkelab.org/ggridges/reference/stat_binline.html'>stat_binline</a></span><span class='op'>(</span>bins <span class='op'>=</span> <span class='fl'>28</span>, scale <span class='op'>=</span> <span class='fl'>0.8</span>, draw_baseline <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://wilkelab.org/ggridges/reference/theme_ridges.html'>theme_ridges</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"none"</span>, 
+        axis.text.y <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_date.html'>scale_x_date</a></span><span class='op'>(</span>
+    name <span class='op'>=</span> <span class='st'>"Expiration Date"</span>, 
+    date_labels <span class='op'>=</span> <span class='st'>"%b-%y"</span>, 
+    date_breaks <span class='op'>=</span> <span class='st'>"4 year"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"date_grouped_subset.png"</span>, <span class='va'>date_grouped_subset</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<figure>
+<img src="date_grouped_subset.png" alt="Grouped" /><figcaption aria-hidden="true">Grouped</figcaption>
+</figure>
+<p>This graph is less informative than we had hoped. While it does show spacing between contracts for each employer, it is difficult to visualize the density of contracts for each employer over time. While we tried to accomplish this with the geom_density_ridges function, it was not sensitive enough to pick up on the multimodality of the data.</p>
+<p>However, we can glean from this chart that most employers do in fact have contracts that expired before and after 2012, further supporting picking a case from that timeframe.</p>
+<h4 id="geographic-distribution">Geographic Distribution</h4>
+<p>We can also look at the distribution of contracts by state and region to see any potential representation issues in our contracts. To do this, we clean up the location column and add in regions using a matching function and data from the census bureau; then plot.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Regions distro</span>
+<span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Loc_unique</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Location</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> <span class='co'>#clean up locations</span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"OHIO"</span>, <span class='st'>"OH"</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"FORT HILL, OK"</span>, <span class='st'>"OK"</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"PASCAGONOULA, MISSISSIPPI"</span>, <span class='st'>"MS"</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"PASCAGOULA"</span>, <span class='st'>"MS"</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"U.S."</span>, <span class='st'>"NATIONAL"</span><span class='op'>)</span>  <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"(..).+"</span>, <span class='st'>'\\1'</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"NA"</span>, <span class='st'>"NATIONAL"</span><span class='op'>)</span>
+
+<span class='va'>regions</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span> <span class='co'>#add region column using census data</span>
+  <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>'/Users/dananestor/DACSS/Useful Data/us census bureau regions and divisions.csv'</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"NATIONAL"</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Region</span> <span class='op'>&lt;-</span> <span class='va'>regions</span><span class='op'>$</span><span class='va'>Region</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/match.html'>match</a></span><span class='op'>(</span>
+                            <span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Loc_unique</span>, 
+                            <span class='va'>regions</span><span class='op'>$</span><span class='va'>`State Code`</span><span class='op'>)</span><span class='op'>]</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"NATIONAL"</span>, <span class='st'>"National"</span><span class='op'>)</span>
+
+<span class='va'>states_subset</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> <span class='co'>#plot by state</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>Loc_unique</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>
+    title <span class='op'>=</span> <span class='st'>"Distribution by State"</span>, 
+    x <span class='op'>=</span> <span class='st'>"State"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
+    axis.text.x <span class='op'>=</span> 
+      <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>regions_subset</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> <span class='co'>#plot by region</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>Region</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"count"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>
+    title <span class='op'>=</span> <span class='st'>"Distribution by Region"</span>, 
+    x <span class='op'>=</span> <span class='st'>"Region"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
+    axis.text.x <span class='op'>=</span> 
+      <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, 
+                   hjust<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://wilkelab.org/cowplot/reference/plot_grid.html'>plot_grid</a></span><span class='op'>(</span><span class='va'>states_subset</span>, 
+          <span class='va'>regions_subset</span>, 
+          rel_widths <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.25</span>,<span class='fl'>.75</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<p><img src="text-as-data-post-3_files/figure-html5/regions-1.png" width="624" /></p>
+</div>
+<p>In examining the results, we can see that Alaska, Indiana, and Missouri have much higher numbers of contracts relative to other states than their populations would suggest. Similarly, the regions plot shows that the Northeast seems to be underrepresented relative to the other regions. This should be taken into account in any analysis, and we may need to control for it as we continue data exploration.</p>
+<h4 id="industry-distribution">Industry Distribution</h4>
+<p>Finally, we look at distribution across industry within our subset. One of the papers we are relying on for the formulation of this methodology - Ash, et. al. <span class="citation" data-cites="ash2019">(<a href="#ref-ash2019" role="doc-biblioref">Ash, MacLeod, and Naidu 2019</a>)</span> - found significant results when comparing their findings across industries so it is important not only to have this information available, but to see how it is represented in our data.</p>
+<p>We start by importing NAICS data from the census bureau, which will allow us to match against the NAICS meta-data already in our contracts file. We then match the two columns and pull in the full industry name, cleaning up along the way. However, this is more data than we need - it gives hundreds of sub-industries, which would make a graph hard to read and near meaningless. We can fix this by pulling the first two digits of the NAICS code and matching them to a list of top-level industry groupings, allowing for a look at the distribution across major economic sectors.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Industry distro</span>
+<span class='va'>NAICS_short</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span><span class='op'>(</span> <span class='co'>#add industry info</span>
+                  <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"/Users/dananestor/DACSS/Useful Data/NAICS_2_digits.csv"</span>, 
+                            show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span> 
+<span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Industry</span> <span class='op'>&lt;-</span> <span class='va'>naics</span><span class='op'>$</span><span class='va'>industry_title</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/match.html'>match</a></span><span class='op'>(</span>
+                            <span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>NAICS.</span>, 
+                            <span class='va'>naics</span><span class='op'>$</span><span class='va'>industry_code</span><span class='op'>)</span><span class='op'>]</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"NAICS\\s\\d+\\s(.+)"</span>, <span class='st'>"\\1"</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace_all</a></span><span class='op'>(</span><span class='st'>"NAICS\\d+\\s\\d+\\s(.+)"</span>, <span class='st'>"\\1"</span><span class='op'>)</span>
+<span class='va'>contract_frame</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span><span class='st'>"Short_Industry"</span> <span class='op'>=</span> 
+           <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>NAICS.</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Short_Industry</span> <span class='op'>&lt;-</span> <span class='va'>NAICS_short</span><span class='op'>$</span><span class='va'>Definition</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/match.html'>match</a></span><span class='op'>(</span>
+                                    <span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>Short_Industry</span>, 
+                                    <span class='va'>NAICS_short</span><span class='op'>$</span><span class='va'>Sector</span><span class='op'>)</span><span class='op'>]</span>
+
+<span class='va'>label_data</span> <span class='op'>&lt;-</span> <span class='va'>contract_frame</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>  <span class='co'>#set up for polar graph labels</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>Short_Industry</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='st'>"index"</span> <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>label_data</span><span class='op'>$</span><span class='va'>Short_Industry</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace_na.html'>str_replace_na</a></span><span class='op'>(</span><span class='va'>label_data</span><span class='op'>$</span><span class='va'>Short_Industry</span><span class='op'>)</span>
+<span class='va'>number_of_bar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>label_data</span><span class='op'>)</span>
+<span class='va'>angle</span> <span class='op'>&lt;-</span>  <span class='fl'>90</span> <span class='op'>-</span> <span class='fl'>360</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>label_data</span><span class='op'>$</span><span class='va'>index</span><span class='op'>-</span><span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>/</span> <span class='va'>number_of_bar</span> <span class='co'>#calc angle for each</span>
+<span class='va'>label_data</span><span class='op'>$</span><span class='va'>hjust</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>angle</span> <span class='op'>&lt;</span> <span class='op'>-</span><span class='fl'>90</span>, <span class='co'>#calc side of graph</span>
+                           <span class='fl'>1</span>, 
+                           <span class='fl'>0</span><span class='op'>)</span> 
+<span class='va'>label_data</span><span class='op'>$</span><span class='va'>angle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>angle</span> <span class='op'>&lt;</span> <span class='op'>-</span><span class='fl'>90</span>, <span class='co'>#flip angle to make readable</span>
+                           <span class='va'>angle</span> <span class='op'>+</span> <span class='fl'>180</span>, 
+                           <span class='va'>angle</span><span class='op'>)</span> 
+
+<span class='va'>industry_subset</span> <span class='op'>&lt;-</span> <span class='va'>label_data</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> <span class='co'>#plot by industry</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>index</span><span class='op'>)</span>, 
+             y <span class='op'>=</span> <span class='va'>n</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span>, 
+           fill <span class='op'>=</span> <span class='fu'><a href='https://scales.r-lib.org/reference/alpha.html'>alpha</a></span><span class='op'>(</span><span class='st'>"black"</span>, <span class='fl'>0.7</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>50</span>, <span class='fl'>220</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='co'>#remove themes, labels</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
+    axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+    axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+    panel.grid <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+    plot.margin <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='fl'>4</span><span class='op'>)</span>, <span class='st'>"cm"</span><span class='op'>)</span> <span class='co'>#Adjust the margin to make in sort labels are not truncated</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_polar.html'>coord_polar</a></span><span class='op'>(</span>start <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>+</span> <span class='co'>#change to polar coords</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>index</span>, 
+                y <span class='op'>=</span> <span class='va'>n</span>, 
+                label <span class='op'>=</span> <span class='va'>Short_Industry</span>, 
+                hjust <span class='op'>=</span> <span class='va'>hjust</span><span class='op'>)</span>, 
+            color <span class='op'>=</span> <span class='st'>"black"</span>, 
+            fontface <span class='op'>=</span> <span class='st'>"bold"</span>,
+            alpha <span class='op'>=</span> <span class='fl'>0.6</span>, 
+            size <span class='op'>=</span> <span class='fl'>2.5</span>, 
+            angle <span class='op'>=</span> <span class='va'>label_data</span><span class='op'>$</span><span class='va'>angle</span>, 
+            inherit.aes <span class='op'>=</span> <span class='cn'>FALSE</span>, 
+            nudge_y <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> 
+<span class='va'>industry_subset</span> 
+</code></pre>
+</div>
+</details>
+<p><img src="text-as-data-post-3_files/figure-html5/industries-1.png" width="624" /></p>
+</div>
+<p>After adding more industry information to our data, we chart the count of contracts in our subset in each sector using a circular barplot (h/t to the R Graph Gallery, <span class="citation" data-cites="holtz">(<a href="#ref-holtz" role="doc-biblioref">Holtz, n.d.</a>)</span>). This shows what we would expect based on subject area knowledge - the construction and manufacturing industries are heavily represented, while most others have only a few contracts in our subset. This may be useful information as we move through analysis.</p>
+<h3 id="corpus-creation">Corpus Creation</h3>
+<p>Now that we understand our data better, it is time to start processing the contract text so we can start analysis. We begin with the creation of a corpus. Using the <strong>corpus()</strong> function in the <strong><em>quanteda</em></strong> package, we are able to easily extract the text from our data frame and convert it into a useable corpus object. We also use the <strong>summary()</strong> function to create a corpus summary object and explore the dimensions of our text data.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>contract_corpus</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/corpus.html'>corpus</a></span><span class='op'>(</span><span class='va'>contract_frame</span><span class='op'>$</span><span class='va'>text</span><span class='op'>)</span>
+<span class='va'>contract_corpus_summary</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>contract_corpus</span>, n <span class='op'>=</span> <span class='cn'>Inf</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>contract_corpus_summary</span><span class='op'>)</span>, 
+      caption <span class='op'>=</span> <span class='st'>'Dimensions of Corpus'</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_styling.html'>kable_styling</a></span><span class='op'>(</span>bootstrap_options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"striped"</span>, <span class='st'>"hover"</span>, <span class='st'>"responsive"</span><span class='op'>)</span>, 
+                full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+<table class="table table-striped table-hover table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:corpus">Table 4: </span>Dimensions of Corpus
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Text
+</th>
+<th style="text-align:left;">
+Types
+</th>
+<th style="text-align:left;">
+Tokens
+</th>
+<th style="text-align:left;">
+Sentences
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Length:186
+</td>
+<td style="text-align:left;">
+Min. : 32
+</td>
+<td style="text-align:left;">
+Min. : 36
+</td>
+<td style="text-align:left;">
+Min. : 1.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Class :character
+</td>
+<td style="text-align:left;">
+1st Qu.: 1688
+</td>
+<td style="text-align:left;">
+1st Qu.: 9648
+</td>
+<td style="text-align:left;">
+1st Qu.: 316.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Mode :character
+</td>
+<td style="text-align:left;">
+Median : 2340
+</td>
+<td style="text-align:left;">
+Median : 15649
+</td>
+<td style="text-align:left;">
+Median : 472.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Mean : 2877
+</td>
+<td style="text-align:left;">
+Mean : 26596
+</td>
+<td style="text-align:left;">
+Mean : 789.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+3rd Qu.: 3668
+</td>
+<td style="text-align:left;">
+3rd Qu.: 35453
+</td>
+<td style="text-align:left;">
+3rd Qu.: 956.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Max. :14163
+</td>
+<td style="text-align:left;">
+Max. :202218
+</td>
+<td style="text-align:left;">
+Max. :4006.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>While this mostly looks good, it is notable that the minimum for tokens and sentences is concerningly low - it would be shocking if a labor contract were only 1 sentence or 36 words. We will have to explore these documents further to ensure that they are appropriate for inclusion and were converted properly.</p>
+<h3 id="pre-processing-from-corpus-to-dfm">Pre-processing: from Corpus to DFM</h3>
+<p>We finally have a corpus to work with! But to utilize it appropriately, we must also create a document feature matrix (DFM) to facilitate further analysis.</p>
+<p>When creating this DFM, we must make some pre-processing decisions to help reduce dimensionality that only contains noise and ensure that grammatical quirks do not hinder our analysis. This includes removing English stopwords and punctuation, and converting all characters to lower case. In so doing, we are filtering out certain parts of our text string that do not provide contextual information, and may cause certain forms of the same word to be treated separately (such as a capitalized version at the start of a sentence). We also decide to exclude words that are used rarely (less than three times) as these likely will not contribute to our topic modelling given their infrequent appearance in the data.</p>
+<p>However, these decisions may have a major effect on the output of our model, especially given the rigorous structure of legal documents. One potential issue may arise when further subsetting text strings to focus on certain paragraphs or clauses, like a management rights section. Thus, we must keep in mind the effects of this pre-processing as we develop our analytical techniques.</p>
+<div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>contract_dfm</span> <span class='op'>&lt;-</span> <span class='va'>contract_corpus</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+   <span class='fu'><a href='https://quanteda.io/reference/dfm.html'>dfm</a></span><span class='op'>(</span>remove <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/stopwords/man/stopwords.html'>stopwords</a></span><span class='op'>(</span><span class='st'>'english'</span><span class='op'>)</span>, 
+      remove_punct <span class='op'>=</span> <span class='cn'>TRUE</span>, 
+      tolower <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_trim.html'>dfm_trim</a></span><span class='op'>(</span>min_termfreq <span class='op'>=</span> <span class='fl'>3</span>, 
+           verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='va'>contract_dfm_trimmed</span> <span class='op'>&lt;-</span> <span class='va'>contract_dfm</span> <span class='op'><a href='https://quanteda.io/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_select.html'>dfm_remove</a></span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"$"</span>, 
+                         <span class='st'>"^"</span>, 
+                         <span class='fu'><a href='https://stringr.tidyverse.org/reference/modifiers.html'>regex</a></span><span class='op'>(</span><span class='st'>"[:digit:]"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/grDevices/png.html'>png</a></span><span class='op'>(</span><span class='st'>"subset_wordcloud_initial.png"</span>, res <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/quanteda.textplots/man/textplot_wordcloud.html'>textplot_wordcloud</a></span><span class='op'>(</span><span class='va'>contract_dfm_trimmed</span>, 
+                   scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>.4</span><span class='op'>)</span>, 
+                   max_words <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/grDevices/dev.html'>dev.off</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</details>
+</div>
+<p>Once our DFM is created, we can check out how we did with a word cloud.</p>
+<figure>
+<img src="subset_wordcloud_initial.png" alt="Wordcloud" /><figcaption aria-hidden="true">Wordcloud</figcaption>
+</figure>
+<p>This is exciting! Though it does highlight a few issues. Namely: - The most-frequent word is “shall” which, in our context, likely has little meaning so we will have to determine which “legalese” stopwords to remove in addition to those found in the “English” library. - Individual numbers (and letters) are still present despite our trying to remove them from the DFM; these likely correspond to section headings and thus are meaningless at the moment - we must determine how to remove them - We might consider lemmatizing given the different forms of similar words present (based, base, bases &amp; make, made)</p>
+<p>But the major point is we now have our data in a format we can use and a good idea of the timeframe for our key case! While we have some additional pre-processing to take care of, hopefully soon we will be able to move on to topic modelling.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-ash2019" class="csl-entry" role="doc-biblioentry">
+Ash, Elliott, W Bentley MacLeod, and Suresh Naidu. 2019. <span>“The Language of Contract: Promises and Power in Union Collective Bargaining Agreements,”</span> March, 59.
+</div>
+<div id="ref-holtz" class="csl-entry" role="doc-biblioentry">
+Holtz, Yan. n.d. <span>“Circular Barplot | the R Graph Gallery.”</span> <a href="https://r-graph-gallery.com/circular-barplot.html">https://r-graph-gallery.com/circular-barplot.html</a>.
+</div>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1514,20 +2299,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-appendix">
 </div>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->
