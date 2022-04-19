@@ -7,7 +7,19 @@
     <description>Dana Nestor's blog for DACSS work
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 27 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Text as Data Post 3</title>
+      <dc:creator>Dana Nestor</dc:creator>
+      <link>https://dnestor.github.io/posts/2022-03-06-text-as-data-post-3</link>
+      <description>Data exploration, corpus creation, and pre-processing</description>
+      <category>Text as Data</category>
+      <category>Data Exploration</category>
+      <category>Pre-processing</category>
+      <guid>https://dnestor.github.io/posts/2022-03-06-text-as-data-post-3</guid>
+      <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://dnestor.github.io/posts/2022-03-06-text-as-data-post-3/text-as-data-post-3_files/figure-html5/regions-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Text as Data Post 2A</title>
       <dc:creator>Dana Nestor</dc:creator>
