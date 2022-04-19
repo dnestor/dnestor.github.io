@@ -2,14 +2,13 @@
 title: "Text as Data Post 3"
 description: |
   Data exploration, corpus creation, and pre-processing
+preview: subset_wordcloud_initial.png
 author:
   - name: Dana Nestor
     url: https://dnestor.github.io/
     affiliation: UMASS DACSS
     affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
 date: 2022-03-06
-base_url: https://dnestor.github.io/posts/2022-03-06-text-as-data-post-3/
-preview: images/subset_wordcloud_initial.png
 categories:
   - Text as Data
   - Data Exploration
@@ -206,7 +205,7 @@ However, we can glean from this chart that most employers do in fact have contra
 
 We can also look at the distribution of contracts by state and region to see any potential representation issues in our contracts. To do this, we clean up the location column and add in regions using a matching function and data from the census bureau; then plot.
 
-```{r regions}
+```{r regions, preview = FALSE}
 # Regions distro
 contract_frame$Loc_unique <- contract_frame$Location %>% #clean up locations
   str_replace_all("OHIO", "OH") %>%
