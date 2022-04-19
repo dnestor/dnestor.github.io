@@ -2,7 +2,7 @@
 title: "Text as Data Post 3"
 description: |
   Data exploration, corpus creation, and pre-processing
-preview: subset_wordcloud_initial.png
+preview: https://dnestor.github.io/posts/2022-03-06-text-as-data-post-3/subset_wordcloud_initial.png
 author:
   - name: Dana Nestor
     url: https://dnestor.github.io/
