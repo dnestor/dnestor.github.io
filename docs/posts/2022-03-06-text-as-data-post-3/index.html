@@ -2936,7 +2936,7 @@ Show code
 <figure>
 <img src="date_grouped_subset.png" alt="Grouped" /><figcaption aria-hidden="true">Grouped</figcaption>
 </figure>
-<p>This graph is less informative than we had hoped. While it does show spacing between contracts for each employer, it is difficult to visualize the density of contracts for each employer over time. While we tried to accomplish this with the geom_density_ridges function, it was not sensitive enough to pick up on the multimodality of the data.</p>
+<p>This graph is less informative than we had hoped. While it does show spacing between contracts for each employer, it is difficult to visualize the density of contracts for each employer over time. While we tried to accomplish this with the <strong>geom_density_ridges()</strong> function, it was not sensitive enough to pick up on the multimodality of the data.</p>
 <p>However, we can glean from this chart that most employers do in fact have contracts that expired before and after 2012, further supporting picking a case from that timeframe.</p>
 <h4 id="geographic-distribution">Geographic Distribution</h4>
 <p>We can also look at the distribution of contracts by state and region to see any potential representation issues in our contracts. To do this, we clean up the location column and add in regions using a matching function and data from the census bureau; then plot.</p>
@@ -3072,7 +3072,7 @@ Show code
 </details>
 </div>
 <figure>
-<img src="%22industry_subset.png%22" alt="Industry" /><figcaption aria-hidden="true">Industry</figcaption>
+<img src="industry_subset.png" alt="Industry" /><figcaption aria-hidden="true">Industry</figcaption>
 </figure>
 <p>After adding more industry information to our data, we chart the count of contracts in our subset in each sector using a circular barplot (h/t to the R Graph Gallery, <span class="citation" data-cites="holtz">(<a href="#ref-holtz" role="doc-biblioref">Holtz, n.d.</a>)</span>). This shows what we would expect based on subject area knowledge - the construction and manufacturing industries are heavily represented, while most others have only a few contracts in our subset. This may be useful information as we move through analysis.</p>
 <h3 id="corpus-creation">Corpus Creation</h3>
@@ -3252,7 +3252,12 @@ Show code
 <figure>
 <img src="subset_wordcloud_initial.png" alt="Wordcloud" /><figcaption aria-hidden="true">Wordcloud</figcaption>
 </figure>
-<p>This is exciting! Though it does highlight a few issues. Namely: - The most-frequent word is “shall” which, in our context, likely has little meaning so we will have to determine which “legalese” stopwords to remove in addition to those found in the “English” library. - Individual numbers (and letters) are still present despite our trying to remove them from the DFM; these likely correspond to section headings and thus are meaningless at the moment - we must determine how to remove them - We might consider lemmatizing given the different forms of similar words present (based, base, bases &amp; make, made)</p>
+<p>This is exciting! Though it does highlight a few issues. Namely:</p>
+<ul>
+<li><p>The most-frequent word is “shall” which, in our context, likely has little meaning so we will have to determine which “legalese” stopwords to remove in addition to those found in the “English” library.</p></li>
+<li><p>Individual numbers (and letters) are still present despite our trying to remove them from the DFM; these likely correspond to section headings and thus are meaningless at the moment - we must determine how to remove them</p></li>
+<li><p>We might consider lemmatizing given the different forms of similar words present (based, base, bases &amp; make, made)</p></li>
+</ul>
 <p>But the major point is we now have our data in a format we can use and a good idea of the timeframe for our key case! While we have some additional pre-processing to take care of, hopefully soon we will be able to move on to topic modelling.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">

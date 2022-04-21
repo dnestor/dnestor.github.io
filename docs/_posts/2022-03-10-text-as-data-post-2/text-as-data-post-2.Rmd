@@ -6,7 +6,7 @@ author:
   - name: Dana Nestor
     url: https://dnestor.github.io/
     affiliation: UMASS DACSS
-    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
 date: 02-20-2022
 categories:
   - Text as Data

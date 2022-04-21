@@ -197,7 +197,7 @@ ggsave("date_grouped_subset.png", date_grouped_subset)
 
 ![Grouped](date_grouped_subset.png)
 
-This graph is less informative than we had hoped. While it does show spacing between contracts for each employer, it is difficult to visualize the density of contracts for each employer over time. While we tried to accomplish this with the geom_density_ridges function, it was not sensitive enough to pick up on the multimodality of the data.
+This graph is less informative than we had hoped. While it does show spacing between contracts for each employer, it is difficult to visualize the density of contracts for each employer over time. While we tried to accomplish this with the **geom_density_ridges()** function, it was not sensitive enough to pick up on the multimodality of the data.
 
 However, we can glean from this chart that most employers do in fact have contracts that expired before and after 2012, further supporting picking a case from that timeframe.
 
@@ -325,10 +325,9 @@ industry_subset <- label_data %>% #plot by industry
 ggsave("industry_subset.png", industry_subset)
 ```
 
-![Industry]("industry_subset.png")
+![Industry](industry_subset.png)
 
-After adding more industry information to our data, we chart the count of contracts in our subset in each sector using a circular barplot (h/t to the R Graph Gallery, [@holtz]). This shows what we would expect based on subject area knowledge - the construction and manufacturing industries are heavily represented, while most others have only a few contracts in our subset. This may be useful information as we move through analysis.  
-
+After adding more industry information to our data, we chart the count of contracts in our subset in each sector using a circular barplot (h/t to the R Graph Gallery, [@holtz]). This shows what we would expect based on subject area knowledge - the construction and manufacturing industries are heavily represented, while most others have only a few contracts in our subset. This may be useful information as we move through analysis.
 
 ### Corpus Creation
 
@@ -346,10 +345,9 @@ kable(summary(contract_corpus_summary),
 
 While this mostly looks good, it is notable that the minimum for tokens and sentences is concerningly low - it would be shocking if a labor contract were only 1 sentence or 36 words. We will have to explore these documents further to ensure that they are appropriate for inclusion and were converted properly.
 
-
 ### Pre-processing: from Corpus to DFM
 
-We finally have a corpus to work with! But to utilize it appropriately, we must also create a document feature matrix (DFM) to facilitate further analysis. 
+We finally have a corpus to work with! But to utilize it appropriately, we must also create a document feature matrix (DFM) to facilitate further analysis.
 
 When creating this DFM, we must make some pre-processing decisions to help reduce dimensionality that only contains noise and ensure that grammatical quirks do not hinder our analysis. This includes removing English stopwords and punctuation, and converting all characters to lower case. In so doing, we are filtering out certain parts of our text string that do not provide contextual information, and may cause certain forms of the same word to be treated separately (such as a capitalized version at the start of a sentence). We also decide to exclude words that are used rarely (less than three times) as these likely will not contribute to our topic modelling given their infrequent appearance in the data.
 
@@ -381,8 +379,11 @@ Once our DFM is created, we can check out how we did with a word cloud.
 ![Wordcloud](subset_wordcloud_initial.png)
 
 This is exciting! Though it does highlight a few issues. Namely:
-- The most-frequent word is "shall" which, in our context, likely has little meaning so we will have to determine which "legalese" stopwords to remove in addition to those found in the "English" library. 
-- Individual numbers (and letters) are still present despite our trying to remove them from the DFM; these likely correspond to section headings and thus are meaningless at the moment - we must determine how to remove them
-- We might consider lemmatizing given the different forms of similar words present (based, base, bases & make, made)
+
+-   The most-frequent word is "shall" which, in our context, likely has little meaning so we will have to determine which "legalese" stopwords to remove in addition to those found in the "English" library.
+
+-   Individual numbers (and letters) are still present despite our trying to remove them from the DFM; these likely correspond to section headings and thus are meaningless at the moment - we must determine how to remove them
+
+-   We might consider lemmatizing given the different forms of similar words present (based, base, bases & make, made)
 
 But the major point is we now have our data in a format we can use and a good idea of the timeframe for our key case! While we have some additional pre-processing to take care of, hopefully soon we will be able to move on to topic modelling.
