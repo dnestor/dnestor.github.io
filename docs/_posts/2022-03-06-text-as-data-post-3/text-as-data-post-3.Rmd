@@ -19,6 +19,7 @@ output:
     self_contained: FALSE
     code_folding: TRUE
     toc: TRUE
+    toc_depth: 4
 bibliography: references.bib
 ---
 
@@ -269,9 +270,13 @@ We start by importing NAICS data from the census bureau, which will allow us to 
 NAICS_short <- as_tibble( #add industry info
                   read_csv("/Users/dananestor/DACSS/Useful Data/NAICS_2_digits.csv", 
                             show_col_types = FALSE)) 
-contract_frame$Industry <- naics$industry_title[match(
+NAICS <- as_tibble(
+                  read_csv("/Users/dananestor/DACSS/Useful Data/NAICS_complete.csv", 
+                            show_col_types = FALSE))
+
+contract_frame$Industry <- NAICS$industry_title[match(
                             contract_frame$NAICS., 
-                            naics$industry_code)] %>%
+                            NAICS$industry_code)] %>%
   str_replace_all("NAICS\\s\\d+\\s(.+)", "\\1") %>%
   str_replace_all("NAICS\\d+\\s\\d+\\s(.+)", "\\1")
 contract_frame <- contract_frame %>%

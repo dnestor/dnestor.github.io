@@ -1,0 +1,338 @@
+---
+title: "Text as Data Post 4"
+description: |
+  Further processing and data exploration
+author:
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
+date: 2022-03-27
+categories:
+  - Text as Data
+  - Data exploration
+  - Pre-processing
+draft: FALSE
+output:
+  distill::distill_article:
+    self_contained: FALSE
+    code_folding: FALSE
+    toc: TRUE
+    toc_depth: 4
+---
+
+Files for everything done below can be found on [GitHub](https://github.com/dnestor/dnestor.github.io/tree/main/docs/_posts/2022-03-27-text-as-data-post-4)
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(pdftools)
+library(stringr)
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(cowplot)
+library(lubridate)
+library(kableExtra)
+library(stringdist)
+```
+
+### Fixes from Last Post
+
+needed to recreate larger frame, code below does this, not significantly different than earlier posts, included for context if interested
+
+```{r larger-frame, cache = TRUE}
+# Import info on files to be used
+corpus_docs <- read_csv(
+  "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/corpus_docs.csv", 
+  show_col_types = FALSE)
+corpus_files <- corpus_docs$File
+corpus_file_names <- as.character(corpus_docs$Name)
+clean_contracts_table <- read_csv(
+  "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-06-text-as-data-post-3/clean_contracts_table.csv",
+  show_col_types = FALSE)
+
+# Create new contract frame
+big_contract_frame <- tibble("a","b","c") #create empty data frame 
+colnames(big_contract_frame) <- c("contract", "text", "pages")
+
+# Loop for adding contract number, document text, and page numbers
+for (i in seq_along(corpus_files)){
+#  print(i)
+  big_contract_frame[i,1] <- corpus_file_names[i]
+  big_contract_frame[i,2] <- 
+    paste(
+      suppressMessages(pdf_text(
+        corpus_files[i])), 
+    sep = '', collapse = '')
+  big_contract_frame[i,3] <- as.character(
+    pdf_info(corpus_files[i])$pages)
+}
+
+# Join w contracts table for metadata
+big_contract_frame$contract <- as.integer(big_contract_frame$contract) #convert to integer for join 
+big_contract_frame$pages <- as.integer(big_contract_frame$pages)
+
+big_contract_frame <- #pull in meta-data using join
+  left_join(big_contract_frame, 
+            clean_contracts_table, 
+            by = c("contract" = "CBA.File")) %>%
+  select(
+    c(contract, Employer.Name, Union, Location, Expiration.Date, NAICS., X.Wrkrs, pages, text))
+
+# Clean up regions
+big_contract_frame$Loc_unique <- big_contract_frame$Location %>% #clean up location names
+  str_replace_all("OHIO", "OH") %>%
+  str_replace_all("FORT HILL, OK", "OK") %>%
+  str_replace_all("PASCAGONOULA, MISSISSIPPI", "MS") %>%
+  str_replace_all("PASCAGOULA", "MS") %>%
+  str_replace_all("U.S.", "NATIONAL")  %>%
+  str_replace_all("(..).+", '\\1') %>%
+  str_replace_all("NA", "NATIONAL")
+
+regions <- as_tibble( #pull in census data on regions
+  read_csv('/Users/dananestor/DACSS/Useful Data/us census bureau regions and divisions.csv', 
+           show_col_types = FALSE)) %>%
+  rbind(rep("NATIONAL", 4))
+
+big_contract_frame$Region <- regions$Region[match( #add region column using census data
+                            big_contract_frame$Loc_unique,
+                            regions$`State Code`)] %>%
+  str_replace_all("NATIONAL", "National")
+
+# Clean up industry
+NAICS_short <- as_tibble( #pull in census data on industry
+                  read_csv("/Users/dananestor/DACSS/Useful Data/NAICS_2_digits.csv",
+                            show_col_types = FALSE))
+NAICS <- as_tibble(
+                  read_csv("/Users/dananestor/DACSS/Useful Data/NAICS_complete.csv", 
+                            show_col_types = FALSE))
+
+big_contract_frame$Industry <- NAICS$industry_title[match( #add specific industry info
+                            big_contract_frame$NAICS.,
+                            NAICS$industry_code)] %>%
+  str_replace_all("NAICS\\s\\d+\\s(.+)", "\\1") %>%
+  str_replace_all("NAICS\\d+\\s\\d+\\s(.+)", "\\1")
+
+big_contract_frame <- big_contract_frame %>% #add general industry info
+  mutate("Short_Industry" =
+           substr(NAICS., 1, 2))
+big_contract_frame$Short_Industry <- NAICS_short$Definition[match(
+                                    big_contract_frame$Short_Industry,
+                                    NAICS_short$Sector)]
+
+# Reorder columns
+big_contract_frame <- big_contract_frame %>%
+  select(
+    c(contract, Employer.Name, Union, Location, Loc_unique, Region, Expiration.Date, 
+      NAICS., Industry, Short_Industry, X.Wrkrs, pages, text)
+  )
+
+# Save
+write_csv(big_contract_frame, 
+          "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/big_contract_frame.csv")
+
+big_contract_frame %>%
+  ungroup() %>%
+  slice_head(n = 5) %>%
+  mutate(text = str_trunc(text, 
+                          width = 50)) %>%
+  kable(caption = 'Larger Corpus Data Frame') %>% 
+  kable_styling(bootstrap_options = c("striped", 
+                                      "hover", 
+                                      "responsive")) %>%
+  scroll_box(width = "100%")
+```
+
+### Subset by Article
+
+Index big frame, comparable to corpus text names
+
+```{r index}
+# Index contract by position
+big_contract_frame <- big_contract_frame %>%
+  mutate("Big_Text" = 1:length(big_contract_frame$text), 
+         .before = 1)
+
+# Save
+write_csv(big_contract_frame, 
+          "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/big_contract_frame.csv")
+```
+
+#### KWIC Exploration - Table of Contents
+
+Create corpus, use KWIC to explore
+
+```{r kwic-toc, cache = TRUE}
+# Create corpus
+big_contract_corpus <- corpus(big_contract_frame$text)
+big_contract_corpus_summary <- summary(big_contract_corpus, 
+                                       n = Inf)
+
+# Create KWIC for "Table of Contents"
+kwic_toc <- kwic(big_contract_corpus, 
+             phrase("Table of Contents"), 
+             window = 50,
+             case_insensitive = TRUE)
+
+# Capture contracts with detectable tables of contents
+con_toc <- unique(kwic_toc$docname)
+
+# Visualize
+kwic_toc_table <- tibble("Contract" = kwic_toc$docname, 
+                         "Keyword" = kwic_toc$keyword, 
+                         "Context" = kwic_toc$post)
+
+kwic_toc_table %>%
+  group_by(Contract) %>% #get first two matches for each contract
+  slice_head(n = 2) %>%
+  ungroup() %>% #get first 5 documents
+  slice_head(n = 10) %>%
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", 
+                                      "hover", 
+                                      "responsive"))
+```
+
+Looks like "article" is the top-level unit on most contracts
+
+#### KWIC Exploration - Article
+
+What does it look like around article?
+
+```{r kwic-article, cache=TRUE}
+kwic_art <- kwic(corpus_sample(big_contract_corpus, size = 100),
+             "article", 
+             window = 30,
+             case_insensitive = TRUE)
+
+# Count
+con_art <- unique(kwic_art$docname)
+
+# Visualize
+kwic_art_table <- tibble("Contract" = kwic_art$docname, 
+                         "Keyword" = kwic_art$keyword, 
+                         "Pre" = kwic_art$pre,
+                         "Post" = kwic_art$post)
+
+kwic_art_table %>%
+  group_by(Contract) %>% #get first two matches for each contract
+  slice_head(n = 2) %>%
+  ungroup() %>% #get first 5 documents
+  slice_head(n = 10) %>%
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", 
+                                      "hover", 
+                                      "responsive"))
+```
+
+Use sample of 100 because full corpus is too large. Seems like a good place to start.
+
+Out of 100 contracts sampled (so about `r round((100/697)*100)`% of the corpus), 88 have the word "article" in some form, with `r length(kwic_art$docname)` measured instances.
+
+Good for increasing dimensionality in face of smaller-than-expected data set, allows for subtleties within each article to come through without being overwhelmed by words that appear in many articles, but infrequently in each.
+
+Look at distro of "article" frequency across texts.
+
+```{r art-distro}
+# Count number of mentions of 'article' by document
+art_distro <- kwic_art %>%
+  group_by(docname) %>%
+  count() %>%
+  arrange(n)
+
+# Plot distribution
+art_distro_plot_2 <- art_distro %>%
+  ggplot(
+    aes(x = reorder(docname, n), #order from least to most mentions
+               y = n)) +
+  geom_col() +
+  geom_hline(yintercept = 5, #mark baseline acceptable level
+             color = "red") +
+  xlab("Document") +
+  theme_half_open() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) +
+  ylab("Frequency") +
+  ggtitle("Number of 'Article' Mentions by Document", 
+          "Frequency of term in corpus sample")
+
+# Save
+ggsave("art_distro_plot_2.png", 
+       art_distro_plot_2, 
+       width = 14, 
+       height = 9)
+```
+
+![](/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/art_distro_plot_2.png) Promising distro. Red line set at 5 instances of "article," which seemed like a reasonable threshold - below, and contracts almost surely have some structural issue that should be explored.
+
+#### Aside
+
+Found a very significant code error. Had to go back and fix most of the post. What you just read is correct now, but previously it looked very different. When examining the distro of "article" mentions across documents, found that many contracts only have one mention, which was inconsistent with the term being a top-level index.
+
+![First plot of article mentions against number of contracts](/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/art_distro_plot.png)
+
+To investigate further, created code below to inspect words around the term in docs with infrequent usage, with a hunch that this could be a different meaning of "article."
+
+```{r aside}
+# NOT RUN
+# sum(art_distro$n_Docs[1:4]) #174 docs w/4 or fewer mentions of article
+
+# kwic_art_small <- tibble("Contract" = kwic_art$docname, #create new tibble
+#                         "Keyword" = kwic_art$keyword, 
+#                         "Pre" = kwic_art$pre,
+#                         "Post" = kwic_art$post) %>%
+#                  add_count(kwic_art$docname) %>% #count number of observations per text
+#                  filter(n <= 4) %>% #filter for texts with 4 or fewer observations
+#                  arrange(n, "Contract", .by_group = TRUE) #arrange in ascending order of number of observations
+```
+
+Nothing in this data suggested an alternate usage of "Article" in our corpus at any significant level. On closer inspection, however, it appears that a number of these contracts have missing text - i.e. not as much text as we expected. After some testing, it becomes clear that we need to re-extract our text as somewhere along the way it was corrupted.
+
+After looking through the code we originally used for this import, it appears that somewhere in our iterations we forgot to remove a subscript so each contract was only representative of the second page! Re-extracted text and re-ran previous functions.
+
+Fixing the error led to major improvements in data quantity and quality:
+
+-   The number of documents with tables of contents went from 198 to 353
+
+-   The number of instances of "article" detected went from 3,523 in 338 documents to a number so large that my computer ran out of memory when trying to process the kwic() function.
+
+-   A sample of 100 contracts produced 7,793 matches, meaning that after the fix, 14% of the corpus produced over twice as many instances as before
+
+### Similarity Betweeen Contracts of Same Employer
+
+Substantial similarity between contracts from same employer? If so, remove so only one before and after to avoid over-weighting?
+
+```{r similarity}
+big_contract_frame <- big_contract_frame %>%
+  arrange(Employer.Name)
+
+similarity_table <- tibble("Contract" = big_contract_frame$contract, 
+                           "Company" = big_contract_frame$Employer.Name, 
+                           "Union" = big_contract_frame$Union, 
+                           "Date" = big_contract_frame$Expiration.Date, 
+                           "Similarity" = rep(0, length(big_contract_frame$text)))
+
+for(i in seq_along(big_contract_frame$text)){
+#  print(i)
+  temp_1 <- big_contract_frame$text[i]
+  temp_2 <- big_contract_frame$text[i + 1]
+  temp_similar <- temp_1[temp_1 %in% temp_2]
+  similarity_table[i,5] <- (length(temp_similar)/length(temp_1)) * 100
+}
+
+similarity_table_grouped <- similarity_table %>%
+  group_by(Company) %>%
+  filter(n() >= 2)
+
+slice_head(similarity_table_grouped,
+           n = 3)
+```
+
+100 appearing in a row means that the following row text is a 100% match. On examination, it appears that there is some pattern to this match, so there are likely duplicate contracts in our data set.
+
+Very imperfect measure, only looking at similarity between adjacent contracts, looking at similarity as literal match of string. But still provides a simple way of seeing whether duplicate contracts exist or not. They do, but it will be difficult to make a meaningful decision b/c of inaccuracy of data, also we may want to keep for various reasons like article changes, etc. Definitely future area of exploration.
+
+### Conclusion
+
+Some interesting findings, were able to expand data in a hopefully meaningful way, corrected more code errors, lots more to do. Next post on cleaning strings, splitting by article, hopefully creating corpus/dfm.

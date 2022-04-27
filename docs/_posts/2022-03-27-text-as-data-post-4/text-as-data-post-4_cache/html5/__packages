@@ -1,0 +1,17 @@
+knitr
+pdftools
+stringr
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+forcats
+quanteda
+quanteda.textplots
+cowplot
+lubridate
+kableExtra
+stringdist
