@@ -7,7 +7,19 @@
     <description>Dana Nestor's blog for DACSS work
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 27 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Text as Data Post 5</title>
+      <dc:creator>Dana Nestor</dc:creator>
+      <link>https://dnestor.github.io/posts/2020-04-10-text-as-data-post-5</link>
+      <description>Cleaning strings</description>
+      <category>Text as Data</category>
+      <category>Data exploration</category>
+      <category>Pre-processing</category>
+      <guid>https://dnestor.github.io/posts/2020-04-10-text-as-data-post-5</guid>
+      <pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://dnestor.github.io/posts/2020-04-10-text-as-data-post-5/text-as-data-post-5_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Text as Data Post 4</title>
       <dc:creator>Dana Nestor</dc:creator>
