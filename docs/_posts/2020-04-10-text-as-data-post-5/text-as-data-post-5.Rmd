@@ -7,7 +7,7 @@ author:
     url: https://dnestor.github.io/
     affiliation: UMASS DACSS
     affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
-date: 2020-04-10
+date: 2022-04-10
 categories:
   - Text as Data
   - Data exploration
