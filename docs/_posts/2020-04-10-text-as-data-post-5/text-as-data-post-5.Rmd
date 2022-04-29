@@ -1,0 +1,207 @@
+---
+title: "Text as Data Post 5"
+description: |
+  Cleaning strings
+author:
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
+date: 2020-04-10
+categories:
+  - Text as Data
+  - Data exploration
+  - Pre-processing
+draft: TRUE
+output:
+  distill::distill_article:
+    self_contained: FALSE
+    code_folding: FALSE
+    toc: TRUE
+    toc_depth: 4
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include = TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(distill)
+library(stringr)
+library(tidyverse)
+library(quanteda)
+library(quanteda.textplots)
+library(wordcloud)
+library(cowplot)
+library(kableExtra)
+library(stringdist)
+library(stm)
+```
+
+### Intro
+
+```{r prep-chunk}
+# Pull in previously created data (some renamed)
+big_meta_frame <- read_csv( #renamed
+  "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/big_contract_frame.csv",
+  show_col_types = FALSE)
+
+corpus_docs <- read_csv(
+  "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-03-27-text-as-data-post-4/corpus_docs.csv", 
+  show_col_types = FALSE)
+corpus_files <- corpus_docs$File
+corpus_file_names <- as.character(corpus_docs$Name)
+meta_contract_corpus <- corpus(big_meta_frame$text) #renamed
+meta_contract_corpus_summary <- read_csv( #renamed
+    "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2020-04-10-text-as-data-post-5/meta_contract_corpus_summary.csv", 
+    show_col_types = FALSE)
+```
+
+### Clean Strings
+
+#### Re-Viz
+
+```{r tokens, cache=TRUE}
+meta_tokens <- meta_contract_corpus %>%
+  tokens(remove_punct = TRUE,
+         remove_symbols = TRUE,
+         remove_numbers = TRUE,
+         remove_url = TRUE)
+```
+
+```{r}
+meta_contract_dfm <- meta_tokens %>%
+   dfm(tolower = TRUE) %>%
+  dfm_remove(pattern = stopwords('english')) %>%
+  dfm_trim(min_termfreq = 3, 
+           min_docfreq = 2,
+           verbose = FALSE)
+
+textplot_wordcloud(meta_contract_dfm, 
+                   max_words = 500)
+```
+
+Messy wordcloud, need to clean
+
+-   Remove Roman numerals
+-   Remove single characters
+-   Remove duplicate forms of words (possessives, some plurals)
+
+#### Some Cleaning
+
+```{r}
+# Remove Roman numerals
+meta_tokens <- meta_tokens %>%
+  tokens_toupper() %>%
+  tokens_remove("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", valuetype = 'regex')
+
+# And single letters
+meta_tokens <- meta_tokens %>%
+  tokens_remove(min_nchar = 2)
+
+# Replace terms
+meta_tokens <- meta_tokens %>%
+  tokens_replace(c("employees", "employee\\'s"), c("employee", "employee")) %>%
+  tokens_replace("employers", "employer") %>%
+  tokens_replace("wages", "wage") %>%
+  tokens_replace("months", "month") %>%
+  tokens_replace("schedules", "schedule") %>%
+  tokens_replace("workers", "worker") %>%
+  tokens_replace("members", "member") %>%
+  tokens_replace("company\\'s", "company") %>%
+  tokens_replace("payments", "payment") %>%
+  tokens_replace("procedures", "procedure")
+
+# Remove terms
+meta_tokens <- meta_tokens %>%
+  tokens_remove("_+", valuetype = 'regex') %>%
+  tokens_remove("^\\d+", valuetype = 'regex') %>%
+  tokens_remove("^-\\d+", valuetype = 'regex') %>%
+  tokens_remove("^#", valuetype = 'regex') %>%
+  tokens_remove("^a\\d+", valuetype = 'regex')
+
+meta_contract_dfm <- meta_tokens %>%
+   dfm(tolower = TRUE) %>%
+  dfm_remove(pattern = stopwords('english')) %>%
+  dfm_trim(min_termfreq = 3, 
+           min_docfreq = 2,
+           verbose = FALSE)
+
+#textplot_wordcloud(meta_contract_dfm, 
+#                   max_words = 500)
+```
+
+![Updated Word Cloud](meta_wordcloud_updated.pdf)
+
+Wordcloud looks much better now
+
+<br>
+
+### Let's Model
+
+```{r cache=TRUE}
+topic_count <- 15
+dfm2stm <- convert(meta_contract_dfm, to = "stm")
+model_stm <- stm(dfm2stm$documents, dfm2stm$vocab, K = topic_count, data = dfm2stm$meta, init.type = "Spectral", seed = 1988, verbose = FALSE) 
+
+stm_topics <- data.frame(t(labelTopics(model_stm, n = 10)$prob)) %>%
+  tibble()
+
+stm_topics %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive")) %>%
+  scroll_box(width = "100%")
+
+```
+
+Not great topics - we need to remove the most frequent terms to capture
+more subtlety.
+
+#### Better model
+
+```{r}
+meta_contract_dfm <- meta_tokens %>%
+  dfm(tolower = TRUE) %>%
+  dfm_remove(pattern = stopwords('english')) %>%
+  dfm_trim(min_termfreq = 3, 
+           min_docfreq = 2,
+           verbose = FALSE) %>%
+  dfm_trim(max_docfreq = 0.95, #add function removing terms appearing in over 95% of documents
+           docfreq_type = "quantile",
+           verbose = FALSE)
+```
+
+```{r cache=TRUE}
+topic_count <- 20 #increase n umber of topics
+dfm2stm <- convert(meta_contract_dfm, to = "stm")
+model_stm <- stm(dfm2stm$documents, dfm2stm$vocab, K = topic_count, data = dfm2stm$meta, init.type = "Spectral", seed = 1988, verbose = FALSE) 
+
+```
+
+```{r}
+stm_topics_2 <- data.frame(t(labelTopics(model_stm, n = 10)$prob)) %>%
+  tibble()
+
+stm_topics_2 %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive")) %>%
+  scroll_box(width = "100%")
+
+```
+
+It's starting to work! We can now see some topics begin to develop:
+
+-   X1 looks like words hyphenated due to line breaks, need to figure
+    out how to combine them
+-   X2 looks like union names, so we should consider how to deal with
+    named entities
+-   X3 looks like it is film-related - need to make sure meta-data was
+    included in this model
+-   X4 looks healthcare-related and shows we need to combine terms
+    related to "nurse"
+-   X6 seems related to aircraft manufacturing
+-   X9 looks like a category related to shipping and dockworkers
+-   etc., etc.
+
+Definitely need a lot more cleaning
