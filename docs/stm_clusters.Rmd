@@ -1,0 +1,314 @@
+---
+title: "stm_clusters"
+author: "Maddi Hertz"
+date: "5/2/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# load packages
+library(tidyverse)
+library(tidymodels)
+library(tidygraph)
+library(tidytext)
+library(broomExtra)
+library(quanteda)
+library(quanteda.textstats)
+library(quanteda.textplots)
+library(quanteda.textmodels)
+library(janitor)
+library(stm)
+library(stminsights)
+library(kableExtra)
+library(ggnetwork)
+library(igraph)
+library(cowplot)
+
+# read in data
+cba_clust_df <- read_csv("cba_clust_df.csv", show_col_types = FALSE)
+```
+
+Utilities - to be used later
+```{r}
+my_stopwords <- c("lhe", "january", "february","march", "april", "june", "july", "august", 
+                  "september", "october", "november", "december", "a.m", "p.m", "article", 
+                  "section", "cornell", "university", "metadata", "page", "1he", "kentucky", 
+                  "connecticut", "york", "philadelphia", "kansas", "putnam", "lancaster", "angeles", 
+                  "santa", "california", "pennsylvania", "monroe", "jersey", "barbara", "edward", 
+                  "henry", "southwest", "canada", "southern", "alaska", "minnesota", "dakota", 
+                  "north", "south", "ohio", "emplo", "shallbe", "fromthe","followingthe", "michigan", 
+                  "paragraph", "subjectto", "ence", "wort", "gary", "ions", "10the", "david", 
+                  "dennis", "jefferson", "title", "employee_is", "employee_who", "employee_shall", 
+                  "employee_has", "employeewill", "purposeof", "returnto", "memorandum", "agreement", 
+                  "employee", "employer")
+
+my_tokens <- function(corpus) {
+  corpus  %>%
+    tokens(remove_symbols = T, remove_punct = T, remove_numbers = T) %>%
+    tokens_remove(stopwords("en")) %>%
+    tokens_toupper() %>%
+    tokens_remove("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", valuetype = 'regex') %>%
+    tokens_remove(min_nchar = 4) %>%
+    tokens_remove(max_nchar = 20) %>%
+    tokens_remove(my_stopwords) %>%
+    tokens_ngrams(n = 1:2)
+}
+
+# Metadata: same as cba_clust_df but without the `text` column so it isn't too big
+clust_meta <- cba_clust_df %>%
+  select(-text)
+
+```
+
+In theory, now that we've identified five union clusters we can use the clusters in the topic model
+The three main clusters are industrial, building, and service.
+The other two are "health" and "sports". We don't have enough documents to do anything with the sports contracts. And while "health" (includes nurses and hospital based service workers) is pretty similar to "service" its better for it to be its own cluster because if we were to include it, it would ruin our chances of a healthcare coverage topic.
+
+Subset corpus into three corpora and run separate topic models for each cluster (building trades, industrial trades, service sector)
+```{r}
+# gives you how many documents are in each cluster
+tabyl(clust_meta, union_clust_lab)
+
+# corpus with all documents
+cba_corpus <- corpus(cba_clust_df)
+
+# tokenize
+cba_tokens <- my_tokens(cba_corpus)
+
+# create and trim dfm
+cba_dfm <- dfm(cba_tokens)
+dim(cba_dfm) #3.3M #3.17M
+cba_trim_dfm <- dfm_trim(cba_dfm, min_docfreq = .03, max_docfreq = .9, docfreq_type = "prop") 
+dim(cba_trim_dfm) #41K #37K
+
+
+clust_meta$union_clean <- if_else(is.na(clust_meta$union_clean), "missing", clust_meta$union_clean)
+
+cba_trim_dfm_2 <- dfm_trim(cba_dfm, min_docfreq = .1, max_docfreq = .9, docfreq_type = "prop") %>%
+  dfm_remove(pattern = c("employeeshall", "employeesshall", "tlie", "employeeto", "employeeshall", "stan", "corp", "employee_is", "fonh", "1hat", "employmenl"), case_insensitive = TRUE) %>%
+  dfm_replace("effective_effective", "effective") %>%
+  dfm_replace("provisionsof", "provision") %>%
+  dfm_replace("membersof", "member") %>%
+  dfm_replace("plan's", "plan") %>%
+  dfm_replace("titles", "title") %>%
+  dfm_replace("testing", "test") %>%
+  dfm_replace("rate_rate", "rate") %>%
+  dfm_replace("bargainingunit", "bargaining_unit") %>%
+  dfm_replace("requiredto", "required") %>%
+  dfm_replace("ovenime", "overtime") %>%
+  dfm_replace("vesting", "vest")
+# subset corpus
+#build_corpus <- corpus_subset(cba_corpus, cba_corpus$union_clust_lab == "building")
+#indust_corpus <- corpus_subset(cba_corpus, cba_corpus$union_clust_lab == "industrial")
+#service_corpus <- corpus_subset(cba_corpus, cba_corpus$union_clust_lab == "service")
+
+```
+
+Create token object and dfm for each cluster
+```{r}
+# clean tokens
+#build_tokens <- my_tokens(build_corpus)
+#indust_tokens <- my_tokens(indust_corpus)
+#service_tokens <- my_tokens(service_corpus)
+
+# create dfms
+build_dfm <- dfm_subset(cba_trim_dfm, union_clust_lab == "building")
+indust_dfm <- dfm_subset(cba_trim_dfm, union_clust_lab == "industrial")
+service_dfm <- dfm_subset(cba_trim_dfm, union_clust_lab == "service")
+
+# trim dfms
+dim(build_dfm)
+build_trim_dfm <- dfm_trim(build_dfm, min_docfreq = .1, max_docfreq = .9, docfreq_type = "prop")
+dim(build_trim_dfm) #19K #18K #8K
+
+dim(indust_dfm)
+indust_trim_dfm <- dfm_trim(indust_dfm, min_docfreq = .1, max_docfreq = .9, docfreq_type = "prop") %>%
+  dfm_remove(pattern = c("employeeshall", "employeesshall", "tlie", "employeeto", "employeeshall", "stan", "corp", "employee_is", "fonh", "1hat", "employmenl"), case_insensitive = TRUE) %>%
+  dfm_replace("effective_effective", "effective") %>%
+  dfm_replace("provisionsof", "provision") %>%
+  dfm_replace("membersof", "member") %>%
+  dfm_replace("plan's", "plan") %>%
+  dfm_replace("titles", "title") %>%
+  dfm_replace("testing", "test") %>%
+  dfm_replace("rate_rate", "rate") %>%
+  dfm_replace("bargainingunit", "bargaining_unit") %>%
+  dfm_replace("requiredto", "required") %>%
+  dfm_replace("ovenime", "overtime") %>%
+  dfm_replace("vesting", "vest")
+dim(indust_trim_dfm) #34K #11K
+
+
+
+dim(service_dfm)
+service_trim_dfm <- dfm_trim(service_dfm, min_docfreq = .1, max_docfreq = .9, docfreq_type = "prop")
+dim(service_trim_dfm) #24K #10K
+```
+
+I made it so that the number of terms in each dfm is very similar (range 35K-39K). I assume that will help down the line, when trying to compare them to each other. But maybe it won't, who knows.
+
+Next step: try some topic models
+```{r}
+clust_meta_build <- clust_meta %>%
+  filter(union_clust == 3) %>%
+  mutate(year = if_else(is.na(year), 2015, year))
+
+
+
+set.seed(02138)
+K<-c(5, 8, 10, 16) 
+kresult_build <- searchK(build_trim_dfm, K = K, N = floor(.1 * nrow(clust_meta_build)), prevalence = ~ employer + s(year) + union_clean + location + (union_clean * location), content = ~ union_clean, data = clust_meta_build, cores = 3)  
+
+
+plot(kresult_build)
+# let's do 5
+######################## need to repeat for each model
+######################## try increasing the number of cores
+
+
+stm_build <- stm(build_trim_dfm, K = 13, prevalence = ~ employer + s(year) + union_clean + location + (union_clean * location), content = ~ union_clean, data = clust_meta_build, init.type = "Spectral", max.em.its = 75, verbose = TRUE, gamma.prior = "L1") 
+
+stm_build_2 <- stm(build_trim_dfm, K = 13, prevalence = ~ employer + s(year) + (union_clean * location), content = ~ union_clean, data = clust_meta_build, init.type = "Spectral", max.em.its = 75, verbose = TRUE, gamma.prior = "L1") 
+######################## remove union_clean from prevalence?
+
+
+sageLabels(stm_build_2)
+
+
+################# NOT RUN
+set.seed(02138)
+K<-c(5, 8, 10, 16) 
+kresult_indust <- searchK(indust_trim_dfm, 
+                          K = K, 
+                          N = floor(0.1 * nrow(clust_meta_indust)), 
+                          prevalence = ~ employer + union_clean + location, 
+                          data = clust_meta_indust, 
+                          cores = 3)
+
+###########################################
+set.seed(02138)
+K<-c(4, 6, 8, 10) 
+kresult_indust <- searchK(indust_trim_dfm, K = K, N = floor(0.1 * nrow(clust_meta_indust)), prevalence = ~ employer + union_clean + location, data = clust_meta_indust, cores = 3)
+beepr::beep(8)
+plot(kresult_indust) 
+
+clust_meta_indust <- clust_meta %>%
+  filter(union_clust == 4) %>%
+  mutate(location = if_else(location == '-', "NATIONAL", location))
+
+clust_meta_indust$employer
+
+stm_indust <- stm(indust_trim_dfm, 
+                  K = 8, 
+                  prevalence = ~ employer + union_clean + location, 
+                  content = ~ union_clean, 
+                  data = clust_meta_indust, 
+                  init.type = "Spectral", 
+                  max.em.its = 75, 
+                  verbose = TRUE, 
+                  interactions = FALSE,
+                  gamma.prior = "L1")
+beepr::beep(8)
+
+sageLabels(stm_indust)
+
+sageLabels(stm_indust_2)
+
+
+############## trim big, subset, trim small; reweight tf-idf after trim?
+
+stm_topics %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
+
+```
+
+ 
+```{r}
+
+stm_indust_effect <- estimateEffect(1:8 ~ employer + union_clean + location, stm_indust, meta = clust_meta_indust, uncertainty = "Global")
+summary(stm_indust_effect, topics = 1)
+
+## VISUALIZE: Presenting STM results
+
+# Summary visualization
+plot(stm_indust, type = "summary", xlim = c(0, 0.3))
+
+# Metadata/topic relationship visualization
+plot(stm_indust, covariate = "rating", topics = c(4, 5, 8), model = stm_indust, method = "difference", cov.value1 = "employer", cov.value2 = "union_clean", xlab = "Management ... Labor", main = "Effect of Management vs. Labor", xlim = c(-0.1, 0.1))
+
+
+plot(stm_indust, "day", method = "continuous", topics = 3, model = z, printlegend = FALSE, xaxt = "n", xlab = "Time (2008)")
+monthseq <- seq(from = as.Date("2008-01-01"), to = as.Date("2008-12-01"), by = "month")
+monthnames <- months(monthseq)
+axis(1,at = as.numeric(monthseq) - min(as.numeric(monthseq)), labels = monthnames)
+
+# Topical content
+plot(stm_indust, type = "perspectives", topics = c(3, 8))
+
+tiff("stm_indust_3_topic_2_wordcloud.tiff", width = 6, height = 6, units = "in", res = 300)
+par(bg = "#EEEEEE")
+cloud(stm_indust_3, topic = 3, scale = c(2, .25), col = "#003b5c")
+dev.off()
+
+mod.out.corr <- topicCorr(stm_indust_3, method = "huge")
+plot(mod.out.corr)
+
+ggplot(ggnetwork(mod.out.corr$cor, layout = "geodist"), aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges() +
+  geom_nodes(aes(color = "#881c1c", size = 24)) + 
+  geom_nodelabel(aes(color = "#881c1c", label = vertex.names),
+                 fontface = "bold") +
+  theme_blank() +
+  theme(panel.background = element_rect(fill = "#EEEEEE"), 
+        legend.position = "none")
+
+ggsave("/Users/dananestor/DACSS/Blog/Untitled/docs/stm_indust_3_topic_network.png")
+
+
+# Semantic Coherence
+semantic_indust_3 <- tibble("Topic" = 1:8, "Semantic Coherence" = semanticCoherence(stm_indust_3, indust_trim_dfm, M = 100))
+semantic_indust_3 %>%
+  ggplot(aes(Topic, `Semantic Coherence`)) +
+  geom_col(fill = "#003b5c") +
+  theme_cowplot(font_family = "sans") +
+  scale_x_continuous(breaks = seq(1, 8, by = 1))
+ggsave("/Users/dananestor/DACSS/Blog/Untitled/docs/semantic_indust_3.tiff")
+
+tiff("stm_indust_3_top_topics.tiff", width = 8, height = 6, units = "in", res = 300)
+par(bg = "#EEEEEE")
+plot(stm_indust_3, type = "summary", col.axis = "#003b5c", fg = "#003b5c", col.main = "#003b5c", col.sub = "#003b5c", xlim = c(0, 1))
+dev.off()
+
+# Convergence
+plot(stm_indust_3$convergence$bound, type = "l", ylab = "Approximate Objective", main = "Convergence")
+```
+ 
+
+```{r}
+# stm_all word cloud
+tiff("stm_all_topic_6_wordcloud.tiff", width = 6, height = 6, units = "in", res = 300)
+par(bg = "#EEEEEE")
+cloud(stm_all, topic = 6, scale = c(2, .25), col = "#63666a")
+dev.off()
+
+# stm_all semantic coherence
+semantic_all <- tibble("Topic" = 1:8, "Semantic Coherence" = semanticCoherence(stm_all, cba_trim_dfm_2, M = 100))
+semantic_all %>%
+  ggplot(aes(Topic, `Semantic Coherence`)) +
+  geom_col(fill = "#63666a") +
+  theme_cowplot(font_family = "sans") +
+  scale_x_continuous(breaks = seq(1, 8, by = 1))
+ggsave("/Users/dananestor/DACSS/Blog/Untitled/docs/semantic_all.tiff")
+
+tiff("stm_all_top_topics.tiff", width = 8, height = 6, units = "in", res = 300)
+par(bg = "#EEEEEE")
+plot(stm_all, type = "summary", col.axis = "#63666a", fg = "#63666a", col.main = "#63666a", col.sub = "#63666a", xlim = c(0, 1))
+dev.off()
+
+```
+
+

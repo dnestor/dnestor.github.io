@@ -157,18 +157,19 @@ date_original <- ggplot( #plot count by date in original
   subset(clean_contracts_table, 
          !is.na(Expiration.Date)), 
   aes(Expiration.Date)) +
-  geom_step(stat = "count") +
+  geom_step(stat = "count", color = "#003b5c") +
+  theme_cowplot() +
   scale_x_date(
     name = "Expiration Date", 
-    date_labels = "%b-%y", 
+    date_labels = "%b-%Y", 
     date_breaks = "4 year", 
     limit = c(as.Date("2000-01-01"), #reduce x-axis for interpretability
-              as.Date("2028-01-01"))) 
+              as.Date("2028-01-01")))
 
-ggsave("date_original.png", date_original)
+ggsave("date_original.tiff", date_original)
 ```
 
-![Original](date_original.png)
+![Original](date_original.tiff)
 
 Here we see a very different distribution - unsurprisingly, there are many more observations in each peak. But the range has also expanded to include many more contemporary documents. Moreover, we can see that the largest peak on the subset graph - occurring in 2012 - is quite a bit smaller than the largest peaks in our original data. And, as we had initially hoped, this distribution appears bi-modal, showing a large proportion of contracts expiring before 2010 and after 2018, which could provide a very interesting gap to investigate for a court case.
 
@@ -228,10 +229,9 @@ contract_frame$Region <- regions$Region[match(
 states_subset <- contract_frame %>% #plot by state
   ungroup() %>%
   ggplot(aes(Loc_unique)) +
-  geom_bar(stat = "count") +
-  labs(
-    title = "Distribution by State", 
-    x = "State") +
+  geom_bar(stat = "count", fill = "#003b5c") +
+  theme_cowplot() +
+  labs(x = "State", y = element_blank()) +
   theme(
     axis.text.x = 
       element_text(angle = 45, hjust=1))
@@ -239,10 +239,9 @@ states_subset <- contract_frame %>% #plot by state
 regions_subset <- contract_frame %>% #plot by region
   ungroup() %>%
   ggplot(aes(Region)) +
-  geom_bar(stat = "count") +
-  labs(
-    title = "Distribution by Region", 
-    x = "Region") +
+  geom_bar(stat = "count", fill = "#003b5c") +
+  theme_cowplot() +
+  labs(x = "Region", y = element_blank()) +
   theme(
     axis.text.x = 
       element_text(angle = 45, 
@@ -250,9 +249,9 @@ regions_subset <- contract_frame %>% #plot by region
 
 regions_duplex <- plot_grid(states_subset, 
           regions_subset, 
-          rel_widths = c(2.25,.75))
+          rel_widths = c(6,2))
 
-ggsave("regions_duplex.png", regions_duplex)
+ggsave("regions_duplex.tiff", regions_duplex)
 ```
 
 ![States and Regions](regions_duplex.png)
@@ -305,7 +304,7 @@ industry_subset <- label_data %>% #plot by industry
   ggplot(aes(x = as.factor(index), 
              y = n)) +
   geom_bar(stat = "identity", 
-           fill = alpha("black", 0.7)) +
+           fill = alpha("#003b5c")) +
   ylim(-50, 220) +
   theme_minimal() + #remove themes, labels
   theme(
@@ -327,7 +326,7 @@ industry_subset <- label_data %>% #plot by industry
             inherit.aes = FALSE, 
             nudge_y = 5) 
 
-ggsave("industry_subset.png", industry_subset)
+ggsave("industry_subset.tiff", industry_subset)
 ```
 
 ![Industry](industry_subset.png)

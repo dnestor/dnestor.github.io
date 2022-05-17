@@ -1,0 +1,281 @@
+---
+title: "union_clusters"
+author: "Maddi Hertz"
+date: "5/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# all the packages; I'm sure I'm not using half of these
+library(readtext)
+library(spacyr)
+library(seededlda)
+library(janitor)
+library(stminsights)
+library(dotwhisker)
+library(broomExtra)
+library(showtext)
+library(pdftools)
+library(cowplot)
+library(lubridate)
+library(ggridges)
+library(kableExtra)
+library(wordcloud)
+library(stringdist)
+library(stm)
+library(knitr)
+library(tidytext)
+library(tidyverse)
+library(quanteda)
+library(quanteda.textmodels)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(textnets)
+library(igraph)
+library(intergraph)
+library(corrr)
+library(sna)
+library(network)
+library(blockmodeling)
+library(factoextra)
+
+# load data
+load("cba_basic.RData")
+clean_union_update <- read_csv("clean_union_update.csv")
+```
+
+Cleaning data
+```{r}
+# add year variable
+cba_corp_df <- cba_corp_df %>%
+  mutate(year = year(end_date))
+
+# join with union labels and fix one misspelling I caught late
+cba_corp_df <- left_join(cba_corp_df, clean_union_update, by = "cba_id")
+cba_corp_df <- cba_corp_df %>%
+  mutate(union_clean = if_else(union_clean == "LUINA", "LIUNA", union_clean))
+
+# add a variable to cba_corp_df that is a count of how many cbas we have from that union
+union_counts <- tabyl(cba_corp_df$union_clean)
+union_counts <- union_counts %>%
+  rename(union_clean = `cba_corp_df$union_clean`)
+cba_corp_df <- left_join(cba_corp_df, union_counts %>% select("union_clean", "n"), 
+                         by = "union_clean")
+cba_corp_df <- cba_corp_df %>%
+  rename(union_count = n)
+
+# turn it into a corpus object and fix the document names
+cba_corpus <- corpus(cba_corp_df)
+docnames(cba_corpus) <- cba_corpus$cba_id
+
+# save metadata as data frame but drop the text so it's much smaller
+cba_meta <- tibble(convert(cba_corpus, to = "data.frame"))
+cba_meta <- cba_meta %>%
+  select(-text)
+```
+
+Preprocessing data
+```{r}
+# create tokens object without the junk
+cba_tokens <- cba_corpus %>%
+  tokens(remove_symbols = T,
+         remove_punct = T,
+         remove_numbers = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  tokens_remove(min_nchar = 3) %>%
+  tokens_remove(max_nchar = 20) %>%
+  tokens_remove(my_stopwords) %>%
+  tokens_ngrams(n = 1:2)
+
+# create sparse dfm
+cba_full_dfm <- dfm(cba_tokens)
+
+# trim dfm so it's not unwieldy 
+cba_trim_dfm <- dfm_trim(cba_full_dfm, min_docfreq = .025, max_docfreq = .8, 
+                         docfreq_type = "prop")
+# check: much better
+dim(cba_trim_dfm)
+
+# create the weighted dfm - I found a function that did what Justin and I were talking about
+# dfm_tfidf weights the dfm on the tfidf but the argument scheme_tf = "prop" does it by
+# the proportion of the document for each term (essentially row proportions; rows sum to 1) 
+cba_trim_tfidf <- dfm_tfidf(cba_trim_dfm, scheme_tf = "prop")
+# convert to matrix just in case (and easier to inspect)
+cba_tfidf_mat <- as.matrix(cba_trim_tfidf)
+
+# euclidean distance was terrible - didn't pickup on anything. All the documents looked the same
+# cosine similarity (Justin said its more popular for text) worked wayyyyy better
+# here I compute the cosine similarity between documents
+# and turn it into a matrix that you can actually look at
+cba_trim_cos <- textstat_simil(cba_trim_tfidf, margin = "documents", method = "cosine")
+cba_trim_cos_mat <- as.matrix(cba_trim_cos)
+
+# now use that matrix for hierarchical clustering
+# here I have ward.D and complete, but ward.D was much better overall
+# you can play around with k in the fviz_dend plots to try out different things
+cba_cos_hc_comp <- hclust(as.dist(1-cba_trim_cos_mat), method = "complete") ################## why 1-cos?
+cba_cos_hc_wd <- hclust(as.dist(1-cba_trim_cos_mat), method = "ward.D")
+cba_cos_hc_wd2 <- hclust(as.dist(1-cba_trim_cos_mat), method = "ward.D2")
+# members = NULL
+
+
+fviz_dend(cba_cos_hc_comp, main = "comp", k = 4)
+fviz_dend(cba_cos_hc_wd, main = "ward D", k = 3)
+fviz_dend(cba_cos_hc_wd2, main = "ward D2", k = 3)
+
+
+# saving ward.D with k = 3 because it was the best imo
+cba_cos_wd_k3 <- tibble(cba_id = cba_trim_tfidf$cba_id,
+                        cba_clust = cutree(cba_cos_hc_wd, k = 3))
+cba_cos_wd_k6 <- tibble(cba_id = cba_trim_tfidf$cba_id,
+                        cba_clust = cutree(cba_cos_hc_wd, k = 6))
+
+# and joining those results with the data frame version of the corpus
+# can now use these later
+cba_corp_df <- left_join(cba_corp_df, cba_cos_wd_k3, by = "cba_id")
+cba_corp_df_2 <- left_join(cba_corp_df, cba_cos_wd_k6, by = "cba_id")
+
+
+# look which unions were assigned to the clusters
+tabyl(cba_corp_df_2, cba_clust, union_clean)
+
+
+cba_corp_df_sample <- cba_corp_df_2 %>%
+  group_by(cba_clust) %>%
+  slice_sample(n = 10)
+```
+Seems pretty clear that the results are still being overwhelmed by duplicate contracts. It makes clear clusters of the contracts that we have many versions of and then lumps everything else together.
+
+To get around this problem I'm going to group by union before weighting.
+I'm also throwing out unions that we only have one contract from because we just don't have enough data to get reliable results. With more time I'm sure theres some fancy bootstrapping thing we could have done to fix this problem. For now though, I'm grouping by union, so instead of all 50+ UAW contracts being treated as separate contracts, they just count as one UAW document. When I again take the row proportions (unions have become the document/row) I am able to get to a place were each union has equal weight when computing future steps.
+```{r}
+# creating corpus and filtering for unions with at least 2 documents
+union_corpus <- cba_corp_df %>%
+  filter(union_clean != is.na(union_clean)) %>%
+  filter(union_count > 1) %>%
+  corpus()
+
+# fix names
+docnames(union_corpus) <- union_corpus$cba_id
+
+# clean tokens
+union_tokens <- union_corpus %>%
+  tokens(remove_symbols = T,
+         remove_punct = T,
+         remove_numbers = T) %>%
+  tokens_remove(stopwords("en")) %>%
+  tokens_remove(min_nchar = 3) %>%
+  tokens_remove(max_nchar = 20) %>%
+  tokens_remove(my_stopwords) %>%
+  tokens_ngrams(n = 1:2)
+
+# create dfm - still the same as before (minus a few documents) up to this point
+union_dfm <- dfm(union_tokens)
+
+# group by union so now each union is its own document 
+# it essentially just adds them all together so the UAW document is actually made of the term 
+# frequencies of all approx. 50 UAW cbas
+union_dfm <- dfm_group(union_dfm, groups = union_dfm$union_clean)
+# you can see that the number of rows has changed
+dim(union_dfm)
+
+####################################### worried that grouping by clean union is determinate of final cluster - forcing together, making similar, etc.
+
+# because there are fewer documents now the minfreq has to be a lot bigger
+union_trim_dfm <- dfm_trim(union_dfm, min_docfreq = .2, max_docfreq = .8, docfreq_type = "prop")
+dim(union_trim_dfm)
+
+# weighting by the PROPORTIONAL tfidf
+union_tfidf <- dfm_tfidf(union_trim_dfm, scheme_tf = "prop")
+# and saving as a matrix
+union_tfidf_mat <- as.matrix(union_tfidf)
+
+# now compute the cosine similarity between unions rather than individual cbas
+# save that too for good measure
+union_cos <- textstat_simil(union_tfidf, margin = "documents", method = "cosine")
+union_cos_mat <- as.matrix(union_cos)
+
+# I tried a whole bunch of distance/similarity scores and different clustering algorithms 
+# And this is one is clearly the best
+# might need to be a bit more systmatic in justifying this choice
+# hoping to get away with saying that I liked it best because it actually made sense
+
+
+######################### what kind?
+
+#### the final clustering model:
+# distance is (1 - cosine similarity) 
+# use tfidf weighted dfm - normalized as row proportions; rows sum to 1
+# ward.D clustering algorithm with k = 5 clusters
+union_cos_hc_wd <- hclust(as.dist(1-union_cos_mat), method = "ward.D")
+fviz_dend(union_cos_hc_wd, main = "Union Weighted by TF-IDF", k = 5, k_colors = c("#003b5c", "#76881d", "#c69214", "#b86125", "#881c1c"), horiz = TRUE, ggtheme = theme_void())
+ggsave("/Users/dananestor/DACSS/Blog/Untitled/docs/union_cos_hierarchy.tiff")
+
+# same as before, you can play around with k see what others would look like
+
+# save ward.D k=5 and joint with the data frame corpus
+union_cos_wd_k5 <- tibble(union_clean = union_cos_hc_wd$labels,
+                          union_clust = cutree(union_cos_hc_wd, k = 5))
+cba_corp_df <- left_join(cba_corp_df, union_cos_wd_k5, by = "union_clean")
+
+# give them labels that make sense
+cba_corp_df <- cba_corp_df %>%
+  mutate(union_clust_lab = case_when(union_clust == 1 ~ "Health",
+                                     union_clust == 2 ~ "Service",
+                                     union_clust == 3 ~ "Construction",
+                                     union_clust == 4 ~ "Manufacturing",
+                                     union_clust == 5 ~ "Sports"))
+
+# look which unions were assigned to each cluster
+tabyl(cba_corp_df, union_clust_lab, union_clean)
+
+cba_corp_df_sample <- cba_corp_df %>%
+  group_by(union_clust) %>%
+  slice_sample(n = 10, replace = T) %>%
+  select(-text)
+
+########################################### we can use NAICS to validate
+NAICS_short <- as_tibble( #add industry info
+                  read_csv("/Users/dananestor/DACSS/Useful Data/NAICS_2_digits.csv", 
+                            show_col_types = FALSE)) 
+NAICS <- as_tibble(
+                  read_csv("/Users/dananestor/DACSS/Useful Data/NAICS_complete.csv", 
+                            show_col_types = FALSE))
+
+cba_corp_df$Industry <- NAICS$industry_title[match(
+                            cba_corp_df$naics, 
+                            NAICS$industry_code)] %>%
+  str_replace_all("NAICS\\s\\d+\\s(.+)", "\\1") %>%
+  str_replace_all("NAICS\\d+\\s\\d+\\s(.+)", "\\1")
+cba_corp_df <- cba_corp_df %>%
+  mutate("Short_Industry" = 
+           substr(naics, 1, 2))
+cba_corp_df$Short_Industry <- NAICS_short$Definition[match(
+                                    cba_corp_df$Short_Industry, 
+                                    NAICS_short$Sector)]
+
+cba_cluster_validation <- tibble("Union" = cba_corp_df$union_clean, 
+                                 "Cluster" = cba_corp_df$union_clust_lab, 
+                                 "Industry" = cba_corp_df$Short_Industry)
+
+cba_cluster_validation$Cluster <- ifelse(
+  cba_cluster_validation$Cluster == cba_cluster_validation$Industry,
+  cell_spec(cba_cluster_validation$Cluster, color = "black", background = "#76881d", bold = T),
+  cell_spec(cba_cluster_validation$Cluster, color = "black", background = "#a8431e", bold = T))
+
+cba_cluster_validation <- cba_cluster_validation %>%
+  filter(!is.na(cba_cluster_validation$Cluster)) %>%
+  slice_head(n = 9) %>%
+kbl(caption = "Validation Against NAICS Code", escape = FALSE) %>% 
+  kable_styling(full_width = FALSE)
+
+save_kable(cba_cluster_validation, file = "/Users/dananestor/DACSS/Blog/Untitled/docs/cba_cluster_validation.png")
+
+# write out the data frame corpus to use in the next file (topic models)
+write_csv(cba_corp_df, "cba_clust_df.csv")
+
+```
+
+I'm honestly pretty amazed that I got this to work so well. The clusters are pretty fucking clean with the right things falling under building trades and industrial trades. Everything else becomes service and then the players associations are off on their own island like they should be.
