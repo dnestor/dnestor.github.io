@@ -1,0 +1,459 @@
+---
+title: "Collective Bargaining Agreement Project Post 7"
+description: |
+  Corpus subsetting, modeling, and visualization
+author:
+  - name: Dana Nestor
+    url: https://dnestor.github.io/
+    affiliation: UMASS DACSS
+    affiliation_url: https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about
+date: 2022-05-17
+categories:
+  - Text as Data
+  - Machine Learning
+  - Topic Modeling
+draft: FALSE
+output:
+  distill::distill_article:
+    self_contained: FALSE
+    code_folding: FALSE
+    toc: TRUE
+    toc_depth: 4
+editor_options: 
+  markdown: 
+    wrap: 72
+  chunk_output_type: inline
+---
+
+
+```{r setup, include=TRUE, results = 'hide', warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+	message = FALSE,
+	warning = FALSE)
+
+library(tidyverse)
+library(tidymodels)
+library(tidygraph)
+library(tidytext)
+library(broomExtra)
+library(quanteda)
+library(quanteda.textstats)
+library(quanteda.textplots)
+library(quanteda.textmodels)
+library(janitor)
+library(stm)
+library(stminsights)
+library(kableExtra)
+library(ggnetwork)
+library(igraph)
+library(cowplot)
+
+# read in data from previous post
+cba_clust_df <- read_csv(
+  "/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-04-24-text-as-data-post-6/cba_clust_df.csv",
+  show_col_types = FALSE)
+```
+
+### Housekeeping
+
+This  code chunk is just some utility objects and functions that we used in the post. It is included for reference (mostly to see the custom stopwords list we created) but can be skipped as it is essentially the same methodologically as our previous post.
+
+
+```{r utilities}
+# Custom stopwords list
+my_stopwords <- c("lhe", "january", "february","march", "april", "june", "july", "august", 
+                  "september", "october", "november", "december", "a.m", "p.m", "article", 
+                  "section", "cornell", "university", "metadata", "page", "1he", "kentucky", 
+                  "connecticut", "york", "philadelphia", "kansas", "putnam", "lancaster", "angeles", 
+                  "santa", "california", "pennsylvania", "monroe", "jersey", "barbara", "edward", 
+                  "henry", "southwest", "canada", "southern", "alaska", "minnesota", "dakota", 
+                  "north", "south", "ohio", "emplo", "shallbe", "fromthe","followingthe", "michigan", 
+                  "paragraph", "subjectto", "ence", "wort", "gary", "ions", "10the", "david", 
+                  "dennis", "jefferson", "title", "employee_is", "employee_who", "employee_shall", 
+                  "employee_has", "employeewill", "purposeof", "returnto", "memorandum", "agreement", 
+                  "employee", "employer", "employeeshall", "employeesshall", "tlie", "employeeto", 
+                  "employeeshall", "stan", "corp", "employee_is", "fonh", "1hat", "employmenl")
+
+# Function to easily tokenize a corpus
+my_tokens <- function(corpus) {
+  corpus  %>%
+    tokens(remove_symbols = T, 
+           remove_punct = T, 
+           remove_numbers = T) %>%
+    tokens_remove(stopwords("en")) %>%
+    tokens_toupper() %>%
+    tokens_remove("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$", #roman numerals
+                  valuetype = 'regex') %>%
+    tokens_remove(min_nchar = 4) %>%
+    tokens_remove(max_nchar = 20) %>%
+    tokens_remove(my_stopwords) %>%
+    tokens_ngrams(n = 1:2)
+}
+
+# Metadata: same as cba_clust_df but without the `text` column so it isn't too big
+clust_meta <- cba_clust_df %>%
+  select(-text)
+
+```
+
+
+### Splitting the Corpus 
+
+In theory, now that we've identified five union clusters we can use the clusters in the topic model. The three main clusters are manufacturing, construction, and service. The other two are "health" and "sports". We don't have enough documents to do anything with the sports contracts. And while "health" (includes nurses and hospital based service workers) is pretty similar to "service," we chose to leave it as its own cluster - our research question involves a healthcare case and it may be useful down the road to have this cluster isolated.
+
+However, in our data exploration we found that, after grouping, the health category did not contain enough documents for a meaningful analysis. For now, we have decided not to include that category of contracts in our corpus. Our hope is that, with more OCR time and resources, we will be able to add observations in this industry and include it in future investigation.
+
+
+#### Clean complete corpus
+
+After initial attempts at topic modeling we decided that the best way to handle industry-specific language was to first create and clean a corpus of all contracts, then split that by industry and re-clean each DFM. Our first go at tidying the corpus using the custom stopwords and function created in the first code chunk results in an overall token reduction from 3.3M to 3.17M.
+
+Next, we created a Document Feature Matrix (DFM) and cleaned it up by removing very frequent and infrequent words. This was a very iterative process as we tuned each parameter. 
+
+To show part of that process, we included two **dfm_trim()** functions below which differ only in the minimum document frequency parameter. The first function removes words that appear in fewer than 1% of documents. This would exclude words appearing in fewer than 7 documents. The second function excludes words appearing in fewer than 10% of documents (or 68 in total), which we felt was a reasonable comparison point. 
+
+```{r cba-corpus, cache=TRUE}
+# Shows how many documents are in each cluster
+# health is fourth largest, has half as many documents as third
+clust_cats <- tabyl(clust_meta, 
+                    union_clust_lab)
+
+# Replace NA with 'missing' in cluster variable
+clust_meta$union_clean <- if_else(
+                                  is.na(clust_meta$union_clean), 
+                                  "missing", 
+                                  clust_meta$union_clean)
+cba_clust_df$union_clean <- if_else(
+                                    is.na(cba_clust_df$union_clean), 
+                                    "missing", 
+                                    cba_clust_df$union_clean)
+
+# Corpus with all documents
+cba_corpus <- corpus(cba_clust_df)
+
+# Tokenize
+cba_tokens <- my_tokens(cba_corpus)
+
+# Create dfm
+cba_dfm <- dfm(cba_tokens)
+#dim(cba_dfm) #3.17M
+
+# Trim dfm, code shows two options for illustration
+cba_trim_dfm <- dfm_trim(cba_dfm, 
+                         min_docfreq = .01, #set floor at 1%
+                         max_docfreq = .9, 
+                         docfreq_type = "prop") %>%
+  dfm_replace("effective_effective", "effective") %>%
+  dfm_replace("provisionsof", "provision") %>%
+  dfm_replace("membersof", "member") %>%
+  dfm_replace("plan's", "plan") %>%
+  dfm_replace("titles", "title") %>%
+  dfm_replace("testing", "test") %>%
+  dfm_replace("rate_rate", "rate") %>%
+  dfm_replace("bargainingunit", "bargaining_unit") %>%
+  dfm_replace("requiredto", "required") %>%
+  dfm_replace("ovenime", "overtime") %>%
+  dfm_replace("vesting", "vest")
+
+cba_trim_dfm_2 <- dfm_trim(cba_dfm, 
+                           min_docfreq = .1, #set floor at 10%
+                           max_docfreq = .9, 
+                           docfreq_type = "prop") %>%
+  dfm_replace("effective_effective", "effective") %>%
+  dfm_replace("provisionsof", "provision") %>%
+  dfm_replace("membersof", "member") %>%
+  dfm_replace("plan's", "plan") %>%
+  dfm_replace("titles", "title") %>%
+  dfm_replace("testing", "test") %>%
+  dfm_replace("rate_rate", "rate") %>%
+  dfm_replace("bargainingunit", "bargaining_unit") %>%
+  dfm_replace("requiredto", "required") %>%
+  dfm_replace("ovenime", "overtime") %>%
+  dfm_replace("vesting", "vest")
+
+# Check results of trim
+#dim(cba_trim_dfm) #139K
+#dim(cba_trim_dfm_2) #9K
+```
+
+The first function (1%) left us with 139K features, while the second (10%) only had 9K, (Aside: we also ran a version with 3% excluded, representing two or fewer documents in our smallest subset, which returned 37K tokens). Given this result, we decided to move forward with the first function as the second would not give us enough data for a meaningful model.
+
+Another feature of our tuning that is readily apparent in the above code are the multiple piped **dfm_replace()** functions. These were developed as we ran different models, etc. and returned to refine each algorithm.
+
+
+#### Subset DFMs
+
+We now have a relatively clean DFM and from here must split it into subsets for our three major industries. From there, we can remove frequent and infrequent terms at the *industry* level.
+
+```{r subset, cache=TRUE, eval=FALSE}
+
+# create dfms
+const_dfm <- dfm_subset(cba_trim_dfm, 
+                        union_clust_lab == "Construction")
+man_dfm <- dfm_subset(cba_trim_dfm, 
+                         union_clust_lab == "Manufacturing")
+serv_dfm <- dfm_subset(cba_trim_dfm, 
+                          union_clust_lab == "Service")
+
+# trim dfms
+#dim(const_dfm)
+const_trim_dfm <- dfm_trim(const_dfm, 
+                           min_docfreq = .075, 
+                           max_docfreq = .9, 
+                           docfreq_type = "prop")
+#dim(const_trim_dfm) #36K at 2% #19K at 5% and #11K at 7.5%
+
+#dim(man_dfm)
+man_trim_dfm <- man_dfm %>%
+  dfm_trim(min_docfreq = .075,
+           max_docfreq = .9,
+           docfreq_type = "prop")
+  
+#dim(man_trim_dfm) #84K #25K #16K
+
+#dim(serv_dfm)
+serv_trim_dfm <- dfm_trim(serv_dfm, 
+                             min_docfreq = .075, 
+                             max_docfreq = .9, 
+                             docfreq_type = "prop")
+#dim(serv_trim_dfm) #84K #22K #14K
+```
+
+After some tinkering, we decided to use a 7.5% lower threshold and 90% upper (upper is same as full corpus) for each industry. This gave us the best balance between removing enough words to run an efficient and effective model, without taking too much out so as to affect meaning. This left us with DFMs in the 11-16K feature range.
+
+We felt that keeping the frequency parameters consistent proportionally across industries was warranted to maintain some sense of equal treatment of terms. However, in the future, we would like to try to equalize the number of terms in each DFM to ensure equivalent analysis. One idea to do this would be some sort of bootstrapping that levels the word count between industry subsets using sampling with replacement. For now, though, the relatively close range of each subset's features should suffice.
+
+
+### Topic Modelling
+
+Now we are able to move to modeling using our trimmed DFMs. For STMs, the researcher must specify the number of topics (K) for the model to use. The ***stm*** package aids in choosing this value with the **searchK()** function, which iterates abbreviated models over several specified values for K and provides diagnostic statistics for comparison. These diagnostic statistics are calculated by holding out a portion of the data for each model to use as a test set, while the rest trains the model. 
+
+It should be noted that executing this function is very computationally expensive, as each supplied value for K requires a separate run, and the duration of that run increases exponentially as the value of K rises. Thus, even running code in parallel through multiple processing cores, each iteration took massive amounts of time. This proved to be very limiting when it came to modeling our data.
+
+
+#### Determining Number of Topics
+
+Starting with the construction industry subset, we run the **searchK()** function to help determine the best value for K. We tweaked the parameters in this function extensively to try and find an appropriate balance between gathering enough information for an informed decision, and working within our computing limitations. Ultimately, we decided to test 5, 8, and 10 topics, though we would have liked to do many more, as is common on less complex datasets. 
+
+We opted to hold out 10% of our data for cross validation, and ran the code through three processing cores so each model could be evaluated simultaneously. We also opted to only supply a topic prevalence model and not an additional topic content model as that would exponentially increase computing time and exclude several diagnostic measures. The following code executes this process and outputs a group of charts for comparison of the three sample models.
+
+```{r const-searchK, cache=TRUE, eval=FALSE}
+clust_meta_const <- clust_meta %>%
+  filter(union_clust == 3) %>%
+  mutate(year = if_else(is.na(year), 
+                        2015, 
+                        year))
+
+set.seed(02138)
+K<-c(5, 8, 10) 
+kresult_const <- searchK(const_trim_dfm, 
+                         K = K, 
+                         N = floor(.1 * nrow(clust_meta_const)), 
+                         prevalence = ~ employer + union_clean + location, 
+                         data = clust_meta_const, 
+                         cores = 3)  
+
+plot(kresult_const)
+# let's do 8 - higher number seems to be better for held-out likelihood and residuals, however semantic coherence does take a hit, 8 gets similar results to 10 in the former two while mitigating the loss in the latter
+
+```
+
+In inspecting these diagnostic graphs, it appears that using eight topics offers the best balance between competing factors. A higher number seems to be better for held-out likelihood (probability of words held back in validation set, higher is better) and residuals (indication whether more topics may be needed to absorb excess variance, lower is better). However, semantic coherence (probability that most frequent words in a topic co-occur together) does take a hit as the number of topics rises. Eight gets similar results to 10 in the first two categories, while mitigating the loss in the last, thus seems like our best choice.
+
+
+#### STM for Construction Industry Contracts
+
+With a value for K selected, we can move on to our actual model. Like the previous function, **stm()** is computationally expensive given the size of our data. To help mitigate this, we use the package author's suggestion to employ the "spectral" initiation type, which offers more stability and faster speeds, and the "L1" gamma prior. 
+
+The model itself uses an additive combination of employer, union, and location to predict topic prevalence within a document, and union to predict topic content within the corpus. We tried many different combinations of variables, including interactions, but this offered the best results. We believe this is due to the nature of the data itself. Because it is still somewhat raw and has significant colinearity, these three major aspects of a contract offer a straightforward method of classifying a contract. We have already shown that contract language can classify a contract into a specific industry - adding specific parties to that contract and the location where it is executed simply enhance the model.
+
+```{r const-stm, cache=TRUE, eval=FALSE}
+stm_const <- stm(const_trim_dfm, 
+                 K = 8, 
+                 prevalence = ~ employer + union_clean + location, 
+                 content = ~ union_clean, 
+                 data = clust_meta_const, 
+                 init.type = "Spectral", 
+                 max.em.its = 75, 
+                 verbose = TRUE,                  
+                 interactions = FALSE,
+                 gamma.prior = "L1") 
+
+beepr::beep(8)
+```
+
+After running our model, the topics look ok. Interestingly, they were better about from about halfway through until right at the end, when suddenly a few top words jumped. Very odd, and worth further exploration. It may be worth trying a different initialization, as the randomness of spectral seems to inadvertantly introduce some words into categories towards the beginning that never end up leaving. 
+
+```{r const-results, eval=FALSE}
+# Print labels
+sageLabels(stm_const, 4)$marginal
+```
+
+Unfortunately, at this point, part of my code broke and I lost my entire global environment. This means that I no longer have access to the results of my **searchK()** and **stm()** results, which took hours to run. From here, I will write out what I can and show the code we developed, but will not be able to recreate the results for submission.
+
+
+#### Manufacturing Model
+
+Our next step would be to repeat the previous process for the manufacturing subset. Below, we clean up a few pieces of the data to ensure our code runs smoothly
+
+```{r man-setup, eval=FALSE}
+clust_meta_man <- clust_meta %>%
+  filter(union_clust == 4) %>%
+  mutate(location = if_else(location == '-', "NATIONAL", location)) %>%
+  mutate(location = if_else(is.na(location), "NATIONAL", location))
+
+man_trim_dfm$location <- replace_na(man_trim_dfm$location, "NATIONAL")
+```
+
+We now proceed to use **searchK()** to help determine the appropriate number of topics to use in this model. As before, we tried a number of different configurations of K values and models, and ultimately decided on the values below as they produced the best results. 
+
+```{r man-searchK, cache=TRUE, eval=FALSE}
+set.seed(02138)
+
+K<-c(4, 6, 8) 
+
+kresult_man <- searchK(man_trim_dfm, 
+                       K = K,
+                       N = floor(0.1 * nrow(clust_meta_man)),
+                       prevalence = ~ employer + union_clean + location,
+                       data = clust_meta_man,
+                       cores = 3)
+beepr::beep(8)
+
+plot(kresult_man) 
+```
+
+Just like with the previous model, we decided to move forward with 8 topics as it offered the best balance between all of the different diagnostic criteria. We now model using 8 topics and the same parameters as the construction industry to keep consistency (and because we tried a bunch of other combinations and this was still the best). 
+
+
+```{r man-stm, cache=TRUE, eval=FALSE}
+stm_man <- stm(man_trim_dfm, 
+                  K = 8, 
+                  prevalence = ~ employer + union_clean + location, 
+                  content = ~ union_clean, 
+                  data = clust_meta_man, 
+                  init.type = "Spectral", 
+                  max.em.its = 75, 
+                  verbose = TRUE, 
+                  interactions = FALSE,
+                  gamma.prior = "L1")
+beepr::beep(8)
+
+```
+
+The topics came out about the same as construction. Mostly contractual language, some industry terms of art left, one category of nonsense misspellings, a couple of categories related to pay and benefits, one that looked like healthcare, and one that was definitely substance abuse-related. 
+
+```{r man-results, eval=FALSE}
+sageLabels(stm_man, 4)$marginal
+```
+
+
+### Analysis
+
+This is where everything was finally going to come together. The visualizations were pretty cool. But, alas, it was not meant to be. So, instead, here is some code showing what I was trying to do, in case you are interested.
+
+```{r viz, eval=FALSE}
+## VISUALIZE: Presenting STM results
+
+# Summary visualization of manufacturing topics, shows top words 
+# and overall percentage of each topic in the corpus
+tiff("stm_indust_3_top_topics.tiff", 
+     width = 8, 
+     height = 6, 
+     units = "in", 
+     res = 300)
+plot(stm_man, 
+     type = "summary", 
+     col.axis = "#003b5c", 
+     fg = "#003b5c", 
+     col.main = "#003b5c", 
+     col.sub = "#003b5c", 
+     xlim = c(0, 1))
+dev.off()
+
+# Metadata/topic relationship visualization, looks at dispersion
+# of topics relative to employer vs. union covariates
+plot(stm_man, 
+     covariate = "rating", 
+     topics = c(4, 5, 8), 
+     model = stm_man, 
+     method = "difference", 
+     cov.value1 = "employer", 
+     cov.value2 = "union_clean", 
+     xlab = "Management ... Labor", 
+     main = "Effect of Management vs. Labor", 
+     xlim = c(-0.1, 0.1))
+
+# Topical content, shows top words relative to two topics - these topics
+# are both wage-related, trying to understand difference between the two
+plot(stm_man, 
+     type = "perspectives", 
+     topics = c(3, 8))
+
+# Wordcloud of topic 
+tiff("stm_man_topic_2_wordcloud.tiff", 
+     width = 6, 
+     height = 6, 
+     units = "in", 
+     res = 300)
+par(bg = "#EEEEEE")
+cloud(stm_man, 
+      topic = 3, 
+      scale = c(2, .25), 
+      col = "#003b5c")
+dev.off()
+
+# Network plot showing correlated topics, here identifying three that 
+# relate to healthcare and benefits
+mod.out.corr <- topicCorr(stm_man, 
+                          method = "huge")
+plot(mod.out.corr)
+
+# Similar chart using ggplot2, need to figure out why the network is
+# fully connected
+ggplot(ggnetwork(mod.out.corr$cor, 
+                 layout = "geodist"), 
+       aes(x = x, 
+           y = y, 
+           xend = xend, 
+           yend = yend)) +
+  geom_edges() +
+  geom_nodes(aes(color = "#881c1c", 
+                 size = 24)) + 
+  geom_nodelabel(aes(color = "#881c1c", 
+                     label = vertex.names),
+                 fontface = "bold") +
+  theme_blank() +
+  theme(panel.background = element_rect(fill = "#EEEEEE"), 
+        legend.position = "none")
+
+ggsave("/Users/dananestor/DACSS/Blog/Untitled/docs/stm_man_topic_network.png")
+
+
+# Semantic Coherence plot showing which topics have top words
+# that frequently occur together
+semantic_man <- tibble("Topic" = 1:8, 
+                            "Semantic Coherence" = semanticCoherence(stm_man, 
+                                                                     man_trim_dfm, 
+                                                                     M = 100))
+semantic_man %>%
+  ggplot(aes(Topic, 
+             `Semantic Coherence`)) +
+  geom_col(fill = "#003b5c") +
+  theme_cowplot(font_family = "sans") +
+  scale_x_continuous(breaks = seq(1, 8, 
+                                  by = 1))
+ggsave("/Users/dananestor/DACSS/Blog/Untitled/docs/semantic_man.tiff")
+
+# Convergence plot showing the amount of change in topic tokens at each iteration
+# of the STM, allows for understanding of whether more or fewer iterations would help
+plot(stm_indust_3$convergence$bound, 
+     type = "l", 
+     ylab = "Approximate Objective", 
+     main = "Convergence")
+```
+ 
+ 
+Overall, this project has been quite interesting and I think it is something that could be worth pursuing. It seems that further corpus cleaning and organization could lead to some substantive findings. However, it has also become clear in this project that the structural topic model is merely a tool to use for exploration of statistical patterns, not one that should be construed for supplying any sort of truth. The sheer amount of assumptions that must go into a model - from specific words to exclude, to significance of different word frequencies, to model parameters, to representation within the corpus, and many, many more dimensions beyond - it is apparent that the results generated are meaningless in the stricter sense of the word. While they can shed light on certain patterns within a document or corpus, and may be useful in some classification and processing settings, the STM simply is not able to get at the subtleties within a document that determine significance and express connotation. 
+

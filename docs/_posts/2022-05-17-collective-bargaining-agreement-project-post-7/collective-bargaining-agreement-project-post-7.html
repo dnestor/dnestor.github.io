@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Collective Bargaining Agreement Project Post 7</title>
+
+  <meta property="description" itemprop="description" content="Corpus subsetting, modeling, and visualization"/>
+
+
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-05-17"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-05-17"/>
+  <meta name="article:author" content="Dana Nestor"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Collective Bargaining Agreement Project Post 7"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Corpus subsetting, modeling, and visualization"/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Collective Bargaining Agreement Project Post 7"/>
+  <meta property="twitter:description" content="Corpus subsetting, modeling, and visualization"/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","draft","output","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["Collective Bargaining Agreement Project Post 7"]},{"type":"character","attributes":{},"value":["Corpus subsetting, modeling, and visualization\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Dana Nestor"]},{"type":"character","attributes":{},"value":["https://dnestor.github.io/"]},{"type":"character","attributes":{},"value":["UMASS DACSS"]},{"type":"character","attributes":{},"value":["https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about"]}]}]},{"type":"character","attributes":{},"value":["2022-05-17"]},{"type":"character","attributes":{},"value":["Text as Data","Machine Learning","Topic Modeling"]},{"type":"logical","attributes":{},"value":[false]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[4]}]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["markdown","chunk_output_type"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["wrap"]}},"value":[{"type":"integer","attributes":{},"value":[72]}]},{"type":"character","attributes":{},"value":["inline"]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["collective-bargaining-agreement-project-post-7_files/anchor-4.2.2/anchor.min.js","collective-bargaining-agreement-project-post-7_files/bowser-1.9.3/bowser.min.js","collective-bargaining-agreement-project-post-7_files/distill-2.2.21/template.v2.js","collective-bargaining-agreement-project-post-7_files/header-attrs-2.13/header-attrs.js","collective-bargaining-agreement-project-post-7_files/jquery-3.6.0/jquery-3.6.0.js","collective-bargaining-agreement-project-post-7_files/jquery-3.6.0/jquery-3.6.0.min.js","collective-bargaining-agreement-project-post-7_files/jquery-3.6.0/jquery-3.6.0.min.map","collective-bargaining-agreement-project-post-7_files/popper-2.6.0/popper.min.js","collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy-bundle.umd.min.js","collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy-light-border.css","collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy.css","collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy.umd.min.js","collective-bargaining-agreement-project-post-7_files/webcomponents-2.0.0/webcomponents.js","Post_7_environment.RDataTmp"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="collective-bargaining-agreement-project-post-7_files/header-attrs-2.13/header-attrs.js"></script>
+  <script src="collective-bargaining-agreement-project-post-7_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="collective-bargaining-agreement-project-post-7_files/popper-2.6.0/popper.min.js"></script>
+  <link href="collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="collective-bargaining-agreement-project-post-7_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="collective-bargaining-agreement-project-post-7_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="collective-bargaining-agreement-project-post-7_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="collective-bargaining-agreement-project-post-7_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="collective-bargaining-agreement-project-post-7_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Collective Bargaining Agreement Project Post 7","description":"Corpus subsetting, modeling, and visualization","authors":[{"author":"Dana Nestor","authorURL":"https://dnestor.github.io/","affiliation":"UMASS DACSS","affiliationURL":"https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about","orcidID":""}],"publishedDate":"2022-05-17T00:00:00.000-04:00","citationText":"Nestor, 2022"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Collective Bargaining Agreement Project Post 7</h1>
+<!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt=tag">Text as Data</div>
+<div class="dt=tag">Machine Learning</div>
+<div class="dt=tag">Topic Modeling</div>
+</div>
+<!--/radix_placeholder_categories-->
+<p><p>Corpus subsetting, modeling, and visualization</p></p>
+</div>
+
+<div class="d-byline">
+  Dana Nestor <a href="https://dnestor.github.io/" class="uri">https://dnestor.github.io/</a> (UMASS DACSS)<a href="https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about" class="uri">https://www.umass.edu/sbs/data-analytics-and-computational-social-science-program/about</a>
+  
+<br/>2022-05-17
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#housekeeping">Housekeeping</a></li>
+<li><a href="#splitting-the-corpus">Splitting the Corpus</a>
+<ul>
+<li><a href="#clean-complete-corpus">Clean complete corpus</a></li>
+<li><a href="#subset-dfms">Subset DFMs</a></li>
+</ul></li>
+<li><a href="#topic-modelling">Topic Modelling</a>
+<ul>
+<li><a href="#determining-number-of-topics">Determining Number of Topics</a></li>
+<li><a href="#stm-for-construction-industry-contracts">STM for Construction Industry Contracts</a></li>
+<li><a href="#manufacturing-model">Manufacturing Model</a></li>
+</ul></li>
+<li><a href="#analysis">Analysis</a></li>
+</ul>
+</nav>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>
+  echo <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  message <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  warning <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidygraph.data-imaginist.com'>tidygraph</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/juliasilge/tidytext'>tidytext</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://indrajeetpatil.github.io/broomExtra/'>broomExtra</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://quanteda.io'>quanteda</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://quanteda.io'>quanteda.textstats</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>quanteda.textplots</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/quanteda/quanteda.textmodels'>quanteda.textmodels</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/sfirke/janitor'>janitor</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.structuraltopicmodel.com/'>stm</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/cschwem2er/stminsights'>stminsights</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/briatte/ggnetwork'>ggnetwork</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://igraph.org'>igraph</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://wilkelab.org/cowplot/'>cowplot</a></span><span class='op'>)</span>
+
+<span class='co'># read in data from previous post</span>
+<span class='va'>cba_clust_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span>
+  <span class='st'>"/Users/dananestor/DACSS/Blog/Untitled/docs/_posts/2022-04-24-text-as-data-post-6/cba_clust_df.csv"</span>,
+  show_col_types <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h3 id="housekeeping">Housekeeping</h3>
+<p>This code chunk is just some utility objects and functions that we used in the post. It is included for reference (mostly to see the custom stopwords list we created) but can be skipped as it is essentially the same methodologically as our previous post.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Custom stopwords list</span>
+<span class='va'>my_stopwords</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lhe"</span>, <span class='st'>"january"</span>, <span class='st'>"february"</span>,<span class='st'>"march"</span>, <span class='st'>"april"</span>, <span class='st'>"june"</span>, <span class='st'>"july"</span>, <span class='st'>"august"</span>, 
+                  <span class='st'>"september"</span>, <span class='st'>"october"</span>, <span class='st'>"november"</span>, <span class='st'>"december"</span>, <span class='st'>"a.m"</span>, <span class='st'>"p.m"</span>, <span class='st'>"article"</span>, 
+                  <span class='st'>"section"</span>, <span class='st'>"cornell"</span>, <span class='st'>"university"</span>, <span class='st'>"metadata"</span>, <span class='st'>"page"</span>, <span class='st'>"1he"</span>, <span class='st'>"kentucky"</span>, 
+                  <span class='st'>"connecticut"</span>, <span class='st'>"york"</span>, <span class='st'>"philadelphia"</span>, <span class='st'>"kansas"</span>, <span class='st'>"putnam"</span>, <span class='st'>"lancaster"</span>, <span class='st'>"angeles"</span>, 
+                  <span class='st'>"santa"</span>, <span class='st'>"california"</span>, <span class='st'>"pennsylvania"</span>, <span class='st'>"monroe"</span>, <span class='st'>"jersey"</span>, <span class='st'>"barbara"</span>, <span class='st'>"edward"</span>, 
+                  <span class='st'>"henry"</span>, <span class='st'>"southwest"</span>, <span class='st'>"canada"</span>, <span class='st'>"southern"</span>, <span class='st'>"alaska"</span>, <span class='st'>"minnesota"</span>, <span class='st'>"dakota"</span>, 
+                  <span class='st'>"north"</span>, <span class='st'>"south"</span>, <span class='st'>"ohio"</span>, <span class='st'>"emplo"</span>, <span class='st'>"shallbe"</span>, <span class='st'>"fromthe"</span>,<span class='st'>"followingthe"</span>, <span class='st'>"michigan"</span>, 
+                  <span class='st'>"paragraph"</span>, <span class='st'>"subjectto"</span>, <span class='st'>"ence"</span>, <span class='st'>"wort"</span>, <span class='st'>"gary"</span>, <span class='st'>"ions"</span>, <span class='st'>"10the"</span>, <span class='st'>"david"</span>, 
+                  <span class='st'>"dennis"</span>, <span class='st'>"jefferson"</span>, <span class='st'>"title"</span>, <span class='st'>"employee_is"</span>, <span class='st'>"employee_who"</span>, <span class='st'>"employee_shall"</span>, 
+                  <span class='st'>"employee_has"</span>, <span class='st'>"employeewill"</span>, <span class='st'>"purposeof"</span>, <span class='st'>"returnto"</span>, <span class='st'>"memorandum"</span>, <span class='st'>"agreement"</span>, 
+                  <span class='st'>"employee"</span>, <span class='st'>"employer"</span>, <span class='st'>"employeeshall"</span>, <span class='st'>"employeesshall"</span>, <span class='st'>"tlie"</span>, <span class='st'>"employeeto"</span>, 
+                  <span class='st'>"employeeshall"</span>, <span class='st'>"stan"</span>, <span class='st'>"corp"</span>, <span class='st'>"employee_is"</span>, <span class='st'>"fonh"</span>, <span class='st'>"1hat"</span>, <span class='st'>"employmenl"</span><span class='op'>)</span>
+
+<span class='co'># Function to easily tokenize a corpus</span>
+<span class='va'>my_tokens</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>corpus</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>corpus</span>  <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens.html'>tokens</a></span><span class='op'>(</span>remove_symbols <span class='op'>=</span> <span class='cn'>T</span>, 
+           remove_punct <span class='op'>=</span> <span class='cn'>T</span>, 
+           remove_numbers <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_select.html'>tokens_remove</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/stopwords/man/stopwords.html'>stopwords</a></span><span class='op'>(</span><span class='st'>"en"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_tolower.html'>tokens_toupper</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_select.html'>tokens_remove</a></span><span class='op'>(</span><span class='st'>"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$"</span>, <span class='co'>#roman numerals</span>
+                  valuetype <span class='op'>=</span> <span class='st'>'regex'</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_select.html'>tokens_remove</a></span><span class='op'>(</span>min_nchar <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_select.html'>tokens_remove</a></span><span class='op'>(</span>max_nchar <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_select.html'>tokens_remove</a></span><span class='op'>(</span><span class='va'>my_stopwords</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'><a href='https://quanteda.io/reference/tokens_ngrams.html'>tokens_ngrams</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+<span class='co'># Metadata: same as cba_clust_df but without the `text` column so it isn't too big</span>
+<span class='va'>clust_meta</span> <span class='op'>&lt;-</span> <span class='va'>cba_clust_df</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>text</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h3 id="splitting-the-corpus">Splitting the Corpus</h3>
+<p>In theory, now that we’ve identified five union clusters we can use the clusters in the topic model. The three main clusters are manufacturing, construction, and service. The other two are “health” and “sports”. We don’t have enough documents to do anything with the sports contracts. And while “health” (includes nurses and hospital based service workers) is pretty similar to “service,” we chose to leave it as its own cluster - our research question involves a healthcare case and it may be useful down the road to have this cluster isolated.</p>
+<p>However, in our data exploration we found that, after grouping, the health category did not contain enough documents for a meaningful analysis. For now, we have decided not to include that category of contracts in our corpus. Our hope is that, with more OCR time and resources, we will be able to add observations in this industry and include it in future investigation.</p>
+<h4 id="clean-complete-corpus">Clean complete corpus</h4>
+<p>After initial attempts at topic modeling we decided that the best way to handle industry-specific language was to first create and clean a corpus of all contracts, then split that by industry and re-clean each DFM. Our first go at tidying the corpus using the custom stopwords and function created in the first code chunk results in an overall token reduction from 3.3M to 3.17M.</p>
+<p>Next, we created a Document Feature Matrix (DFM) and cleaned it up by removing very frequent and infrequent words. This was a very iterative process as we tuned each parameter.</p>
+<p>To show part of that process, we included two <strong>dfm_trim()</strong> functions below which differ only in the minimum document frequency parameter. The first function removes words that appear in fewer than 1% of documents. This would exclude words appearing in fewer than 7 documents. The second function excludes words appearing in fewer than 10% of documents (or 68 in total), which we felt was a reasonable comparison point.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Shows how many documents are in each cluster</span>
+<span class='co'># health is fourth largest, has half as many documents as third</span>
+<span class='va'>clust_cats</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/janitor/man/tabyl.html'>tabyl</a></span><span class='op'>(</span><span class='va'>clust_meta</span>, 
+                    <span class='va'>union_clust_lab</span><span class='op'>)</span>
+
+<span class='co'># Replace NA with 'missing' in cluster variable</span>
+<span class='va'>clust_meta</span><span class='op'>$</span><span class='va'>union_clean</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span>
+                                  <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>clust_meta</span><span class='op'>$</span><span class='va'>union_clean</span><span class='op'>)</span>, 
+                                  <span class='st'>"missing"</span>, 
+                                  <span class='va'>clust_meta</span><span class='op'>$</span><span class='va'>union_clean</span><span class='op'>)</span>
+<span class='va'>cba_clust_df</span><span class='op'>$</span><span class='va'>union_clean</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span>
+                                    <span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>cba_clust_df</span><span class='op'>$</span><span class='va'>union_clean</span><span class='op'>)</span>, 
+                                    <span class='st'>"missing"</span>, 
+                                    <span class='va'>cba_clust_df</span><span class='op'>$</span><span class='va'>union_clean</span><span class='op'>)</span>
+
+<span class='co'># Corpus with all documents</span>
+<span class='va'>cba_corpus</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/corpus.html'>corpus</a></span><span class='op'>(</span><span class='va'>cba_clust_df</span><span class='op'>)</span>
+
+<span class='co'># Tokenize</span>
+<span class='va'>cba_tokens</span> <span class='op'>&lt;-</span> <span class='fu'>my_tokens</span><span class='op'>(</span><span class='va'>cba_corpus</span><span class='op'>)</span>
+
+<span class='co'># Create dfm</span>
+<span class='va'>cba_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm.html'>dfm</a></span><span class='op'>(</span><span class='va'>cba_tokens</span><span class='op'>)</span>
+<span class='co'>#dim(cba_dfm) #3.17M</span>
+
+<span class='co'># Trim dfm, code shows two options for illustration</span>
+<span class='va'>cba_trim_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_trim.html'>dfm_trim</a></span><span class='op'>(</span><span class='va'>cba_dfm</span>, 
+                         min_docfreq <span class='op'>=</span> <span class='fl'>.01</span>, <span class='co'>#set floor at 1%</span>
+                         max_docfreq <span class='op'>=</span> <span class='fl'>.9</span>, 
+                         docfreq_type <span class='op'>=</span> <span class='st'>"prop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"effective_effective"</span>, <span class='st'>"effective"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"provisionsof"</span>, <span class='st'>"provision"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"membersof"</span>, <span class='st'>"member"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"plan's"</span>, <span class='st'>"plan"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"titles"</span>, <span class='st'>"title"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"testing"</span>, <span class='st'>"test"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"rate_rate"</span>, <span class='st'>"rate"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"bargainingunit"</span>, <span class='st'>"bargaining_unit"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"requiredto"</span>, <span class='st'>"required"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"ovenime"</span>, <span class='st'>"overtime"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"vesting"</span>, <span class='st'>"vest"</span><span class='op'>)</span>
+
+<span class='va'>cba_trim_dfm_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_trim.html'>dfm_trim</a></span><span class='op'>(</span><span class='va'>cba_dfm</span>, 
+                           min_docfreq <span class='op'>=</span> <span class='fl'>.1</span>, <span class='co'>#set floor at 10%</span>
+                           max_docfreq <span class='op'>=</span> <span class='fl'>.9</span>, 
+                           docfreq_type <span class='op'>=</span> <span class='st'>"prop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"effective_effective"</span>, <span class='st'>"effective"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"provisionsof"</span>, <span class='st'>"provision"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"membersof"</span>, <span class='st'>"member"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"plan's"</span>, <span class='st'>"plan"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"titles"</span>, <span class='st'>"title"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"testing"</span>, <span class='st'>"test"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"rate_rate"</span>, <span class='st'>"rate"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"bargainingunit"</span>, <span class='st'>"bargaining_unit"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"requiredto"</span>, <span class='st'>"required"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"ovenime"</span>, <span class='st'>"overtime"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_replace.html'>dfm_replace</a></span><span class='op'>(</span><span class='st'>"vesting"</span>, <span class='st'>"vest"</span><span class='op'>)</span>
+
+<span class='co'># Check results of trim</span>
+<span class='co'>#dim(cba_trim_dfm) #139K</span>
+<span class='co'>#dim(cba_trim_dfm_2) #9K</span>
+</code></pre>
+</div>
+</div>
+<p>The first function (1%) left us with 139K features, while the second (10%) only had 9K, (Aside: we also ran a version with 3% excluded, representing two or fewer documents in our smallest subset, which returned 37K tokens). Given this result, we decided to move forward with the first function as the second would not give us enough data for a meaningful model.</p>
+<p>Another feature of our tuning that is readily apparent in the above code are the multiple piped <strong>dfm_replace()</strong> functions. These were developed as we ran different models, etc. and returned to refine each algorithm.</p>
+<h4 id="subset-dfms">Subset DFMs</h4>
+<p>We now have a relatively clean DFM and from here must split it into subsets for our three major industries. From there, we can remove frequent and infrequent terms at the <em>industry</em> level.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># create dfms</span>
+<span class='va'>const_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_subset.html'>dfm_subset</a></span><span class='op'>(</span><span class='va'>cba_trim_dfm</span>, 
+                        <span class='va'>union_clust_lab</span> <span class='op'>==</span> <span class='st'>"Construction"</span><span class='op'>)</span>
+<span class='va'>man_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_subset.html'>dfm_subset</a></span><span class='op'>(</span><span class='va'>cba_trim_dfm</span>, 
+                         <span class='va'>union_clust_lab</span> <span class='op'>==</span> <span class='st'>"Manufacturing"</span><span class='op'>)</span>
+<span class='va'>serv_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_subset.html'>dfm_subset</a></span><span class='op'>(</span><span class='va'>cba_trim_dfm</span>, 
+                          <span class='va'>union_clust_lab</span> <span class='op'>==</span> <span class='st'>"Service"</span><span class='op'>)</span>
+
+<span class='co'># trim dfms</span>
+<span class='co'>#dim(const_dfm)</span>
+<span class='va'>const_trim_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_trim.html'>dfm_trim</a></span><span class='op'>(</span><span class='va'>const_dfm</span>, 
+                           min_docfreq <span class='op'>=</span> <span class='fl'>.075</span>, 
+                           max_docfreq <span class='op'>=</span> <span class='fl'>.9</span>, 
+                           docfreq_type <span class='op'>=</span> <span class='st'>"prop"</span><span class='op'>)</span>
+<span class='co'>#dim(const_trim_dfm) #36K at 2% #19K at 5% and #11K at 7.5%</span>
+
+<span class='co'>#dim(man_dfm)</span>
+<span class='va'>man_trim_dfm</span> <span class='op'>&lt;-</span> <span class='va'>man_dfm</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://quanteda.io/reference/dfm_trim.html'>dfm_trim</a></span><span class='op'>(</span>min_docfreq <span class='op'>=</span> <span class='fl'>.075</span>,
+           max_docfreq <span class='op'>=</span> <span class='fl'>.9</span>,
+           docfreq_type <span class='op'>=</span> <span class='st'>"prop"</span><span class='op'>)</span>
+  
+<span class='co'>#dim(man_trim_dfm) #84K #25K #16K</span>
+
+<span class='co'>#dim(serv_dfm)</span>
+<span class='va'>serv_trim_dfm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://quanteda.io/reference/dfm_trim.html'>dfm_trim</a></span><span class='op'>(</span><span class='va'>serv_dfm</span>, 
+                             min_docfreq <span class='op'>=</span> <span class='fl'>.075</span>, 
+                             max_docfreq <span class='op'>=</span> <span class='fl'>.9</span>, 
+                             docfreq_type <span class='op'>=</span> <span class='st'>"prop"</span><span class='op'>)</span>
+<span class='co'>#dim(serv_trim_dfm) #84K #22K #14K</span>
+</code></pre>
+</div>
+</div>
+<p>After some tinkering, we decided to use a 7.5% lower threshold and 90% upper (upper is same as full corpus) for each industry. This gave us the best balance between removing enough words to run an efficient and effective model, without taking too much out so as to affect meaning. This left us with DFMs in the 11-16K feature range.</p>
+<p>We felt that keeping the frequency parameters consistent proportionally across industries was warranted to maintain some sense of equal treatment of terms. However, in the future, we would like to try to equalize the number of terms in each DFM to ensure equivalent analysis. One idea to do this would be some sort of bootstrapping that levels the word count between industry subsets using sampling with replacement. For now, though, the relatively close range of each subset’s features should suffice.</p>
+<h3 id="topic-modelling">Topic Modelling</h3>
+<p>Now we are able to move to modeling using our trimmed DFMs. For STMs, the researcher must specify the number of topics (K) for the model to use. The <strong><em>stm</em></strong> package aids in choosing this value with the <strong>searchK()</strong> function, which iterates abbreviated models over several specified values for K and provides diagnostic statistics for comparison. These diagnostic statistics are calculated by holding out a portion of the data for each model to use as a test set, while the rest trains the model.</p>
+<p>It should be noted that executing this function is very computationally expensive, as each supplied value for K requires a separate run, and the duration of that run increases exponentially as the value of K rises. Thus, even running code in parallel through multiple processing cores, each iteration took massive amounts of time. This proved to be very limiting when it came to modeling our data.</p>
+<h4 id="determining-number-of-topics">Determining Number of Topics</h4>
+<p>Starting with the construction industry subset, we run the <strong>searchK()</strong> function to help determine the best value for K. We tweaked the parameters in this function extensively to try and find an appropriate balance between gathering enough information for an informed decision, and working within our computing limitations. Ultimately, we decided to test 5, 8, and 10 topics, though we would have liked to do many more, as is common on less complex datasets.</p>
+<p>We opted to hold out 10% of our data for cross validation, and ran the code through three processing cores so each model could be evaluated simultaneously. We also opted to only supply a topic prevalence model and not an additional topic content model as that would exponentially increase computing time and exclude several diagnostic measures. The following code executes this process and outputs a group of charts for comparison of the three sample models.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>clust_meta_const</span> <span class='op'>&lt;-</span> <span class='va'>clust_meta</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>union_clust</span> <span class='op'>==</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>year <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span>, 
+                        <span class='fl'>2015</span>, 
+                        <span class='va'>year</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>02138</span><span class='op'>)</span>
+<span class='va'>K</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>8</span>, <span class='fl'>10</span><span class='op'>)</span> 
+<span class='va'>kresult_const</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/stm/man/searchK.html'>searchK</a></span><span class='op'>(</span><span class='va'>const_trim_dfm</span>, 
+                         K <span class='op'>=</span> <span class='va'>K</span>, 
+                         N <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>floor</a></span><span class='op'>(</span><span class='fl'>.1</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>clust_meta_const</span><span class='op'>)</span><span class='op'>)</span>, 
+                         prevalence <span class='op'>=</span> <span class='op'>~</span> <span class='va'>employer</span> <span class='op'>+</span> <span class='va'>union_clean</span> <span class='op'>+</span> <span class='va'>location</span>, 
+                         data <span class='op'>=</span> <span class='va'>clust_meta_const</span>, 
+                         cores <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>  
+
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>kresult_const</span><span class='op'>)</span>
+<span class='co'># let's do 8 - higher number seems to be better for held-out likelihood and residuals, however semantic coherence does take a hit, 8 gets similar results to 10 in the former two while mitigating the loss in the latter</span>
+</code></pre>
+</div>
+</div>
+<p>In inspecting these diagnostic graphs, it appears that using eight topics offers the best balance between competing factors. A higher number seems to be better for held-out likelihood (probability of words held back in validation set, higher is better) and residuals (indication whether more topics may be needed to absorb excess variance, lower is better). However, semantic coherence (probability that most frequent words in a topic co-occur together) does take a hit as the number of topics rises. Eight gets similar results to 10 in the first two categories, while mitigating the loss in the last, thus seems like our best choice.</p>
+<h4 id="stm-for-construction-industry-contracts">STM for Construction Industry Contracts</h4>
+<p>With a value for K selected, we can move on to our actual model. Like the previous function, <strong>stm()</strong> is computationally expensive given the size of our data. To help mitigate this, we use the package author’s suggestion to employ the “spectral” initiation type, which offers more stability and faster speeds, and the “L1” gamma prior.</p>
+<p>The model itself uses an additive combination of employer, union, and location to predict topic prevalence within a document, and union to predict topic content within the corpus. We tried many different combinations of variables, including interactions, but this offered the best results. We believe this is due to the nature of the data itself. Because it is still somewhat raw and has significant colinearity, these three major aspects of a contract offer a straightforward method of classifying a contract. We have already shown that contract language can classify a contract into a specific industry - adding specific parties to that contract and the location where it is executed simply enhance the model.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stm_const</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/stm/man/stm.html'>stm</a></span><span class='op'>(</span><span class='va'>const_trim_dfm</span>, 
+                 K <span class='op'>=</span> <span class='fl'>8</span>, 
+                 prevalence <span class='op'>=</span> <span class='op'>~</span> <span class='va'>employer</span> <span class='op'>+</span> <span class='va'>union_clean</span> <span class='op'>+</span> <span class='va'>location</span>, 
+                 content <span class='op'>=</span> <span class='op'>~</span> <span class='va'>union_clean</span>, 
+                 data <span class='op'>=</span> <span class='va'>clust_meta_const</span>, 
+                 init.type <span class='op'>=</span> <span class='st'>"Spectral"</span>, 
+                 max.em.its <span class='op'>=</span> <span class='fl'>75</span>, 
+                 verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,                  
+                 interactions <span class='op'>=</span> <span class='cn'>FALSE</span>,
+                 gamma.prior <span class='op'>=</span> <span class='st'>"L1"</span><span class='op'>)</span> 
+
+<span class='fu'>beepr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/beepr/man/beep.html'>beep</a></span><span class='op'>(</span><span class='fl'>8</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>After running our model, the topics look ok. Interestingly, they were better about from about halfway through until right at the end, when suddenly a few top words jumped. Very odd, and worth further exploration. It may be worth trying a different initialization, as the randomness of spectral seems to inadvertantly introduce some words into categories towards the beginning that never end up leaving.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Print labels</span>
+<span class='fu'><a href='https://rdrr.io/pkg/stm/man/sageLabels.html'>sageLabels</a></span><span class='op'>(</span><span class='va'>stm_const</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='va'>marginal</span>
+</code></pre>
+</div>
+</div>
+<p>Unfortunately, at this point, part of my code broke and I lost my entire global environment. This means that I no longer have access to the results of my <strong>searchK()</strong> and <strong>stm()</strong> results, which took hours to run. From here, I will write out what I can and show the code we developed, but will not be able to recreate the results for submission.</p>
+<h4 id="manufacturing-model">Manufacturing Model</h4>
+<p>Our next step would be to repeat the previous process for the manufacturing subset. Below, we clean up a few pieces of the data to ensure our code runs smoothly</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>clust_meta_man</span> <span class='op'>&lt;-</span> <span class='va'>clust_meta</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>union_clust</span> <span class='op'>==</span> <span class='fl'>4</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>location <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>location</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='st'>"NATIONAL"</span>, <span class='va'>location</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>location <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>location</span><span class='op'>)</span>, <span class='st'>"NATIONAL"</span>, <span class='va'>location</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>man_trim_dfm</span><span class='op'>$</span><span class='va'>location</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tidyr.tidyverse.org/reference/replace_na.html'>replace_na</a></span><span class='op'>(</span><span class='va'>man_trim_dfm</span><span class='op'>$</span><span class='va'>location</span>, <span class='st'>"NATIONAL"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>We now proceed to use <strong>searchK()</strong> to help determine the appropriate number of topics to use in this model. As before, we tried a number of different configurations of K values and models, and ultimately decided on the values below as they produced the best results.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>02138</span><span class='op'>)</span>
+
+<span class='va'>K</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span>, <span class='fl'>8</span><span class='op'>)</span> 
+
+<span class='va'>kresult_man</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/stm/man/searchK.html'>searchK</a></span><span class='op'>(</span><span class='va'>man_trim_dfm</span>, 
+                       K <span class='op'>=</span> <span class='va'>K</span>,
+                       N <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>floor</a></span><span class='op'>(</span><span class='fl'>0.1</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>clust_meta_man</span><span class='op'>)</span><span class='op'>)</span>,
+                       prevalence <span class='op'>=</span> <span class='op'>~</span> <span class='va'>employer</span> <span class='op'>+</span> <span class='va'>union_clean</span> <span class='op'>+</span> <span class='va'>location</span>,
+                       data <span class='op'>=</span> <span class='va'>clust_meta_man</span>,
+                       cores <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'>beepr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/beepr/man/beep.html'>beep</a></span><span class='op'>(</span><span class='fl'>8</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>kresult_man</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
+<p>Just like with the previous model, we decided to move forward with 8 topics as it offered the best balance between all of the different diagnostic criteria. We now model using 8 topics and the same parameters as the construction industry to keep consistency (and because we tried a bunch of other combinations and this was still the best).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stm_man</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/stm/man/stm.html'>stm</a></span><span class='op'>(</span><span class='va'>man_trim_dfm</span>, 
+                  K <span class='op'>=</span> <span class='fl'>8</span>, 
+                  prevalence <span class='op'>=</span> <span class='op'>~</span> <span class='va'>employer</span> <span class='op'>+</span> <span class='va'>union_clean</span> <span class='op'>+</span> <span class='va'>location</span>, 
+                  content <span class='op'>=</span> <span class='op'>~</span> <span class='va'>union_clean</span>, 
+                  data <span class='op'>=</span> <span class='va'>clust_meta_man</span>, 
+                  init.type <span class='op'>=</span> <span class='st'>"Spectral"</span>, 
+                  max.em.its <span class='op'>=</span> <span class='fl'>75</span>, 
+                  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, 
+                  interactions <span class='op'>=</span> <span class='cn'>FALSE</span>,
+                  gamma.prior <span class='op'>=</span> <span class='st'>"L1"</span><span class='op'>)</span>
+<span class='fu'>beepr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/beepr/man/beep.html'>beep</a></span><span class='op'>(</span><span class='fl'>8</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>The topics came out about the same as construction. Mostly contractual language, some industry terms of art left, one category of nonsense misspellings, a couple of categories related to pay and benefits, one that looked like healthcare, and one that was definitely substance abuse-related.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/stm/man/sageLabels.html'>sageLabels</a></span><span class='op'>(</span><span class='va'>stm_man</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='va'>marginal</span>
+</code></pre>
+</div>
+</div>
+<h3 id="analysis">Analysis</h3>
+<p>This is where everything was finally going to come together. The visualizations were pretty cool. But, alas, it was not meant to be. So, instead, here is some code showing what I was trying to do, in case you are interested.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>## VISUALIZE: Presenting STM results</span>
+
+<span class='co'># Summary visualization of manufacturing topics, shows top words </span>
+<span class='co'># and overall percentage of each topic in the corpus</span>
+<span class='fu'><a href='https://rdrr.io/r/grDevices/png.html'>tiff</a></span><span class='op'>(</span><span class='st'>"stm_indust_3_top_topics.tiff"</span>, 
+     width <span class='op'>=</span> <span class='fl'>8</span>, 
+     height <span class='op'>=</span> <span class='fl'>6</span>, 
+     units <span class='op'>=</span> <span class='st'>"in"</span>, 
+     res <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>stm_man</span>, 
+     type <span class='op'>=</span> <span class='st'>"summary"</span>, 
+     col.axis <span class='op'>=</span> <span class='st'>"#003b5c"</span>, 
+     fg <span class='op'>=</span> <span class='st'>"#003b5c"</span>, 
+     col.main <span class='op'>=</span> <span class='st'>"#003b5c"</span>, 
+     col.sub <span class='op'>=</span> <span class='st'>"#003b5c"</span>, 
+     xlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/grDevices/dev.html'>dev.off</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># Metadata/topic relationship visualization, looks at dispersion</span>
+<span class='co'># of topics relative to employer vs. union covariates</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>stm_man</span>, 
+     covariate <span class='op'>=</span> <span class='st'>"rating"</span>, 
+     topics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>8</span><span class='op'>)</span>, 
+     model <span class='op'>=</span> <span class='va'>stm_man</span>, 
+     method <span class='op'>=</span> <span class='st'>"difference"</span>, 
+     cov.value1 <span class='op'>=</span> <span class='st'>"employer"</span>, 
+     cov.value2 <span class='op'>=</span> <span class='st'>"union_clean"</span>, 
+     xlab <span class='op'>=</span> <span class='st'>"Management ... Labor"</span>, 
+     main <span class='op'>=</span> <span class='st'>"Effect of Management vs. Labor"</span>, 
+     xlim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.1</span>, <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Topical content, shows top words relative to two topics - these topics</span>
+<span class='co'># are both wage-related, trying to understand difference between the two</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>stm_man</span>, 
+     type <span class='op'>=</span> <span class='st'>"perspectives"</span>, 
+     topics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>8</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Wordcloud of topic </span>
+<span class='fu'><a href='https://rdrr.io/r/grDevices/png.html'>tiff</a></span><span class='op'>(</span><span class='st'>"stm_man_topic_2_wordcloud.tiff"</span>, 
+     width <span class='op'>=</span> <span class='fl'>6</span>, 
+     height <span class='op'>=</span> <span class='fl'>6</span>, 
+     units <span class='op'>=</span> <span class='st'>"in"</span>, 
+     res <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>bg <span class='op'>=</span> <span class='st'>"#EEEEEE"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/stm/man/cloud.html'>cloud</a></span><span class='op'>(</span><span class='va'>stm_man</span>, 
+      topic <span class='op'>=</span> <span class='fl'>3</span>, 
+      scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>.25</span><span class='op'>)</span>, 
+      col <span class='op'>=</span> <span class='st'>"#003b5c"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/grDevices/dev.html'>dev.off</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># Network plot showing correlated topics, here identifying three that </span>
+<span class='co'># relate to healthcare and benefits</span>
+<span class='va'>mod.out.corr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/stm/man/topicCorr.html'>topicCorr</a></span><span class='op'>(</span><span class='va'>stm_man</span>, 
+                          method <span class='op'>=</span> <span class='st'>"huge"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mod.out.corr</span><span class='op'>)</span>
+
+<span class='co'># Similar chart using ggplot2, need to figure out why the network is</span>
+<span class='co'># fully connected</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/ggnetwork/man/ggnetwork.html'>ggnetwork</a></span><span class='op'>(</span><span class='va'>mod.out.corr</span><span class='op'>$</span><span class='va'>cor</span>, 
+                 layout <span class='op'>=</span> <span class='st'>"geodist"</span><span class='op'>)</span>, 
+       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, 
+           y <span class='op'>=</span> <span class='va'>y</span>, 
+           xend <span class='op'>=</span> <span class='va'>xend</span>, 
+           yend <span class='op'>=</span> <span class='va'>yend</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggnetwork/man/geom_edges.html'>geom_edges</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggnetwork/man/geom_nodes.html'>geom_nodes</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#881c1c"</span>, 
+                 size <span class='op'>=</span> <span class='fl'>24</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/ggnetwork/man/geom_nodetext.html'>geom_nodelabel</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#881c1c"</span>, 
+                     label <span class='op'>=</span> <span class='va'>vertex.names</span><span class='op'>)</span>,
+                 fontface <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggnetwork/man/theme_blank.html'>theme_blank</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>panel.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"#EEEEEE"</span><span class='op'>)</span>, 
+        legend.position <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"/Users/dananestor/DACSS/Blog/Untitled/docs/stm_man_topic_network.png"</span><span class='op'>)</span>
+
+
+<span class='co'># Semantic Coherence plot showing which topics have top words</span>
+<span class='co'># that frequently occur together</span>
+<span class='va'>semantic_man</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span><span class='st'>"Topic"</span> <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>8</span>, 
+                            <span class='st'>"Semantic Coherence"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/stm/man/semanticCoherence.html'>semanticCoherence</a></span><span class='op'>(</span><span class='va'>stm_man</span>, 
+                                                                     <span class='va'>man_trim_dfm</span>, 
+                                                                     M <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>semantic_man</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>Topic</span>, 
+             <span class='va'>`Semantic Coherence`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"#003b5c"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://wilkelab.org/cowplot/reference/theme_cowplot.html'>theme_cowplot</a></span><span class='op'>(</span>font_family <span class='op'>=</span> <span class='st'>"sans"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span>breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>8</span>, 
+                                  by <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"/Users/dananestor/DACSS/Blog/Untitled/docs/semantic_man.tiff"</span><span class='op'>)</span>
+
+<span class='co'># Convergence plot showing the amount of change in topic tokens at each iteration</span>
+<span class='co'># of the STM, allows for understanding of whether more or fewer iterations would help</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>stm_indust_3</span><span class='op'>$</span><span class='va'>convergence</span><span class='op'>$</span><span class='va'>bound</span>, 
+     type <span class='op'>=</span> <span class='st'>"l"</span>, 
+     ylab <span class='op'>=</span> <span class='st'>"Approximate Objective"</span>, 
+     main <span class='op'>=</span> <span class='st'>"Convergence"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Overall, this project has been quite interesting and I think it is something that could be worth pursuing. It seems that further corpus cleaning and organization could lead to some substantive findings. However, it has also become clear in this project that the structural topic model is merely a tool to use for exploration of statistical patterns, not one that should be construed for supplying any sort of truth. The sheer amount of assumptions that must go into a model - from specific words to exclude, to significance of different word frequencies, to model parameters, to representation within the corpus, and many, many more dimensions beyond - it is apparent that the results generated are meaningless in the stricter sense of the word. While they can shed light on certain patterns within a document or corpus, and may be useful in some classification and processing settings, the STM simply is not able to get at the subtleties within a document that determine significance and express connotation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

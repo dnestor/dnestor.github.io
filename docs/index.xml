@@ -7,7 +7,18 @@
     <description>Dana Nestor's blog for DACSS work
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 14 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 May 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Collective Bargaining Agreement Project Post 7</title>
+      <dc:creator>Dana Nestor</dc:creator>
+      <link>https://dnestor.github.io/posts/2022-05-17-collective-bargaining-agreement-project-post-7</link>
+      <description>Corpus subsetting, modeling, and visualization</description>
+      <category>Text as Data</category>
+      <category>Machine Learning</category>
+      <category>Topic Modeling</category>
+      <guid>https://dnestor.github.io/posts/2022-05-17-collective-bargaining-agreement-project-post-7</guid>
+      <pubDate>Tue, 17 May 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Collective Bargaining Agreement Project Post 6</title>
       <dc:creator>Dana Nestor</dc:creator>
